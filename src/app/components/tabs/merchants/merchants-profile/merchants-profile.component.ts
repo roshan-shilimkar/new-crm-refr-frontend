@@ -1,0 +1,242 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTabGroup } from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router';
+import { Index } from 'firebase/firestore';
+import { take } from 'rxjs';
+import { ApiserviceService } from 'src/app/apiservice.service';
+
+import * as XLSX from 'xlsx';
+// type AOA = any[][];
+@Component({
+  selector: 'app-merchants-profile',
+  templateUrl: './merchants-profile.component.html',
+  styleUrls: ['./merchants-profile.component.scss']
+})
+export class MerchantsProfileComponent implements OnInit {
+  indexs: number = 0;
+  listLoc: any[] = [];
+  @ViewChild('MatTabGroupss') mattab?: MatTabGroup;
+
+  SubColumns: string[] = [
+    'Sub_plan',
+    'Sub_amt',
+    'Refr_Count',
+    'Status',
+    'Created_Date',
+    'Valid_Till',
+    'action',
+  ];
+
+  CampColumns: string[] = [
+    'Camp_name',
+    'Camp_type',
+    'Camp_min',
+    'Camp_start',
+    'Camp_end',
+    'Direct_User',
+    'New_User',
+    'Existing_User',
+    'Status'
+  ];
+
+  ProdColumns: string[] = [
+    'Product',
+    'MRP',
+    'Discounted_price',
+    'Qty',
+    'action',
+    'Request',
+  ];
+
+  Ordercolumns: string[] = [
+    'Sr_no',
+    'orderDate',
+    'StoreName',
+    'Cust_Name',
+    'journey',
+    'Vendor_Amt',
+    'Tax',
+    'tcsTax',
+    'Gatway',
+    'Total',
+    'ordStatus',
+  ];
+
+  Campwalletecolumn: string[] = [
+    'orderD',
+    'Cust_name',
+    'Cashbacktype',
+    'Cashback',
+    'OrderAmt',
+    'CwBalance',
+  ]
+
+  Storewalletecolumn: string[] = [
+    'Trans_id',
+    'Trans_type',
+    'Amt',
+    'charges',
+    'Tamount',
+    'PaymentMode',
+    'SwBalance',
+  ]
+
+  CampdataSource!: MatTableDataSource<any>;
+  SubdataSource!: MatTableDataSource<any>;
+  ProductdataSource!: MatTableDataSource<any>;
+  orderdataSource!: MatTableDataSource<any>;
+  CampwalleteTrandataSource!: MatTableDataSource<any>;
+  StorewalleteTrandataSource!: MatTableDataSource<any>;
+  CampaigndataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  storeID: string = "";
+
+  storeDetails: any;
+  storeinfoDetails: any;
+
+
+  productList: Array<any> = [];
+  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService) {
+    this.execute();
+  }
+
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.execute();
+    }, 1000);
+  }
+
+  execute() {
+    this.storeID = this.actRoute.snapshot.params["id"];
+    if (this.storeID != undefined) {
+      this.apiservice.getStoreByID(this.storeID).then(storeRef => {
+        const store: any = storeRef.exists() ? storeRef.data() : null;
+        this.storeDetails = store;
+        this.listLoc = store.loc;
+
+        this.apiservice.getUserByUID(store.by).then(storeuser => {
+          const storeuserD: any = storeuser.exists() ? storeuser.data() : null;
+          this.storeinfoDetails = storeuserD;
+
+        })
+      })
+    }
+    const Products = [
+      {
+        ProdImg_url: 'https://app.refr.club/assets/shreyansh/webp/14.webp',
+        ProdTitle: 'Food & Beverages',
+        ProdDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        ProdMRP: '100',
+        ProdDPrice: '100',
+        ProdQty: '100',
+      },
+      {
+        ProdImg_url: 'https://app.refr.club/assets/shreyansh/webp/14.webp',
+        ProdTitle: 'Food & Beverages',
+        ProdDesc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        ProdMRP: '100',
+        ProdDPrice: '100',
+        ProdQty: '100',
+      }
+    ];
+    this.ProductdataSource = new MatTableDataSource(Products);
+    this.ProductdataSource.paginator = this.paginator;
+    this.ProductdataSource.sort = this.sort;
+  }
+
+  tabchange() {
+    // console.log(this.mattab?.selectedIndex);
+    if (this.mattab?.selectedIndex == 2) {
+      this.getcampaign();
+    }
+    else if (this.mattab?.selectedIndex == 3) {
+      this.getproducts();
+    }
+    else if (this.mattab?.selectedIndex == 4) {
+      this.getorders();
+    }
+  }
+
+
+  getproducts() {
+    this.apiservice.getProductList(this.storeID).pipe(take(1)).subscribe((products: any) => {
+      this.ProductdataSource = new MatTableDataSource(products);
+      this.ProductdataSource.sort = this.sort;
+    })
+  }
+
+  getcampaign() {
+    this.apiservice.getCampaignList(this.storeID).pipe(take(1)).subscribe((Campaigns) => {
+      // console.log("Campaigns");
+      // console.log(Campaigns);
+      this.CampaigndataSource = new MatTableDataSource(Campaigns);
+      this.CampaigndataSource.sort = this.sort;
+      // console.log(this.CampaigndataSource);
+    })
+  }
+
+  getorders() {
+    this.apiservice.getRecentAddedOrder(100, true, "sid", "==", this.storeID).pipe(take(1)).subscribe((recentorders: any) => {
+      this.orderdataSource = new MatTableDataSource(recentorders);
+      this.orderdataSource.sort = this.sort;
+    });
+  }
+
+  campareDate(S_date: any, E_date: any) {
+    return (Date.parse(S_date) <= Date.now()) && (Date.parse(E_date) >= Date.now())
+  }
+
+  onFileChange(evt: any) {
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    console.log(reader);
+
+    reader.onload = (e: any) => {
+
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+      /* grab first sheet */
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+      /* save data */
+      let desc: Array<string> = [];
+      let spec: Array<any> = [];
+      const data = <any>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
+      for (let i = 1; i < data.length; i++) {
+        desc = [];
+        data[0].forEach((element: string, indexs: Index) => {
+          element.indexOf("Description") >= 0 ? (data[i][+indexs] !== "-" ? desc.push(data[i][+indexs]) : "") : ""
+        })
+        spec = [];
+        data[0].forEach((element: string, indexs: Index) => {
+          if (element.indexOf("Specification") >= 0) {
+            console.log(element)
+          }
+          element.indexOf("Specification") >= 0 ? (data[i][+indexs] !== "-" ? spec.push({ [element.substring(element.indexOf("(")+1,element.indexOf(")"))]: data[i][+indexs] }) : "") : ""
+        })
+        this.productList.push({
+          "ProductName": data[i][0],
+          "MRP": data[i][1],
+          "Price": data[i][2],
+          "Category":data[i][3],
+          "HSN CODE":data[i][4],
+          "Description": desc,
+          "Specification": spec,
+        })
+      }
+      console.log(this.productList);
+    }
+
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+}
+
