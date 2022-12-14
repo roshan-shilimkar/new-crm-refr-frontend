@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +10,7 @@ import { take } from 'rxjs';
 import { ApiserviceService } from 'src/app/apiservice.service';
 
 import * as XLSX from 'xlsx';
+import { TransactionDetailsComponent } from '../../transaction-details/transaction-details.component';
 // type AOA = any[][];
 @Component({
   selector: 'app-merchants-profile',
@@ -63,6 +65,7 @@ export class MerchantsProfileComponent implements OnInit {
     'Gatway',
     'Total',
     'ordStatus',
+    'action'
   ];
 
   Campwalletecolumn: string[] = [
@@ -94,13 +97,10 @@ export class MerchantsProfileComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   storeID: string = "";
-
   storeDetails: any;
   storeinfoDetails: any;
-
-
   productList: Array<any> = [];
-  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService) {
+  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService,private dialog :MatDialog) {
     this.execute();
   }
 
@@ -124,7 +124,6 @@ export class MerchantsProfileComponent implements OnInit {
         this.apiservice.getUserByUID(store.by).then(storeuser => {
           const storeuserD: any = storeuser.exists() ? storeuser.data() : null;
           this.storeinfoDetails = storeuserD;
-
         })
       })
     }
@@ -152,7 +151,6 @@ export class MerchantsProfileComponent implements OnInit {
   }
 
   tabchange() {
-    // console.log(this.mattab?.selectedIndex);
     if (this.mattab?.selectedIndex == 2) {
       this.getcampaign();
     }
@@ -174,11 +172,8 @@ export class MerchantsProfileComponent implements OnInit {
 
   getcampaign() {
     this.apiservice.getCampaignList(this.storeID).pipe(take(1)).subscribe((Campaigns) => {
-      // console.log("Campaigns");
-      // console.log(Campaigns);
       this.CampaigndataSource = new MatTableDataSource(Campaigns);
       this.CampaigndataSource.sort = this.sort;
-      // console.log(this.CampaigndataSource);
     })
   }
 
@@ -197,10 +192,7 @@ export class MerchantsProfileComponent implements OnInit {
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
     const reader: FileReader = new FileReader();
-    console.log(reader);
-
     reader.onload = (e: any) => {
-
       const bstr: string = e.target.result;
       const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
       /* grab first sheet */
@@ -232,10 +224,21 @@ export class MerchantsProfileComponent implements OnInit {
           "Specification": spec,
         })
       }
-      console.log(this.productList);
     }
-
     reader.readAsBinaryString(target.files[0]);
+  }
+
+  openDialog(data:any) {
+    this.dialog.open(TransactionDetailsComponent, {
+      width: '90%',
+      minWidth: '90%',
+      maxWidth: '90%',
+      maxHeight: '80%',
+      hasBackdrop: true,
+      disableClose: false,
+      panelClass: 'dialogLayout',
+      data: {Orderdata:data,id: 1 },
+    });
   }
 
 }

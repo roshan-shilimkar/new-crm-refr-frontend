@@ -34,6 +34,15 @@ export class ApiserviceService {
 
   get getServerTimestamp() { return serverTimestamp; }
 
+  getuserdata(id:any){
+    console.log(typeof(id));
+    const catData: CollectionReference = collection(this.firestore, "users");
+    const qu = query(catData,
+      where("uid", "==", id),
+    );
+    return collectionData(qu);
+  }
+
   getUserList(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
     const catData: CollectionReference = collection(this.firestore, "users");
     let Parametere: WhereFilterOp = Para;
@@ -146,6 +155,13 @@ export class ApiserviceService {
   }
 
   getRecentStores(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
+    console.log("c = "+ c);
+    console.log("getall = " + getall);
+    console.log("para = "+ Para);
+    console.log("operator = "+operator);
+    console.log("Value "+value )
+    
+    
     const catData: CollectionReference = collection(this.firestore, "shops");
     let Parametere: WhereFilterOp = Para;
     let conditions: WhereFilterOp = operator;
@@ -159,12 +175,15 @@ export class ApiserviceService {
 
     if (getall == true) {
       if (Parametere != undefined && operator != undefined && value != undefined) {
+        console.log("1.1");
+        
         qu = query(catData,
           where(Parametere, conditions, value),
           orderBy(orderbyvalue, "desc"),
         );
       }
       else {
+        console.log("1.2");
         qu = query(catData,
           orderBy(orderbyvalue, "desc"),
         );
@@ -172,6 +191,7 @@ export class ApiserviceService {
     }
     else {
       if (Parametere != undefined && operator != undefined && value != undefined) {
+        console.log("2.1");
         qu = query(catData,
           where(Parametere, conditions, value),
           orderBy(orderbyvalue, "desc"),
@@ -179,6 +199,7 @@ export class ApiserviceService {
         );
       }
       else {
+        console.log("2.2");
         qu = query(catData,
           orderBy(orderbyvalue, "desc"),
           limit(c),

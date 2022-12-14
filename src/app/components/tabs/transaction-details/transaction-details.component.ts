@@ -29,7 +29,7 @@ export class TransactionDetailsComponent implements OnInit {
     this.Transactiondata = this.Data.Orderdata;
     this.typeid = parseFloat(this.Data.id);
     this.AInWords = this.convertinstring(parseInt(this.Transactiondata.amTotal));
-    console.log(this.AInWords);    
+    console.log(this.Data);
 
   }
 

@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'merchant', component: MerchantsComponent },
       { path: 'users', component: UsersComponent },
       { path: 'merchantProfile/:id', component: MerchantsProfileComponent },
-      { path: 'users/userProfile', component: UserProfileComponent },
+      { path: 'userProfile/:id', component: UserProfileComponent },
       { path: 'Redeemreq', component: RedeemreqComponent },
       { path: 'transaction', component: TransactionComponent },
       { path: 'Notification', component: NotificationComponent },

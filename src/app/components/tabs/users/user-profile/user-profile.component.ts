@@ -1,35 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTabGroup } from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs';
+import { ApiserviceService } from 'src/app/apiservice.service';
+import { TransactionDetailsComponent } from '../../transaction-details/transaction-details.component';
 
 
-
-export interface UsertranData {
-  Tranid: string;
-  TranDate: string;
-  Store_name: string;
-  Category: string;
-  Sub_category: string;
-  // Store_name: string;
-  Bill_amt:string;
-  Trans_type: string;
-  pay_mode:string;
-  Refr_E: string;
-  Refr_P: string;
-}
-
-export interface userorderdata {
-  Tranid: string;
-  TranDate: string;
-  Storename: string;
-  Trans_type: string;
-  // pay_mode: string;
-  Refr_E: string;
-  Refr_P: string;
-  order_amt: string;
-  wal_bal: string;
-}
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -58,12 +38,31 @@ export class UserProfileComponent implements OnInit {
     'wal_bal',
     'action',
   ]
-  UserorderdataSource!: MatTableDataSource<UsertranData>;
-  UsertranSource!: MatTableDataSource<userorderdata>;
 
+  Ordercolumns: string[] = [
+    'Sr_no',
+    'orderDate',
+    'StoreName',
+    'Cust_Name',
+    'journey',
+    'Vendor_Amt',
+    'Tax',
+    'tcsTax',
+    'Gatway',
+    'Total',
+    'ordStatus',
+    'action',
+  ];
+
+  orderdataSource!: MatTableDataSource<any>;
+  UsertranSource!: MatTableDataSource<any>;
+  userdata: any = "";
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('MatTabGroupss') mattab?: MatTabGroup;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor() { }
+  userID: string = "";
+
+  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService,private dialog :MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -75,142 +74,40 @@ export class UserProfileComponent implements OnInit {
   }
 
   execute() {
-    const userorders = [
-    {
-      Tranid: '1234567890',
-      TranDate: '12/1/2022',
-      Store_name: '1234567890',
-      Category: 'Health',
-      Sub_category: 'Dentist',
-      Bill_amt: '1000',
-      Trans_type: 'Direct',
-      pay_mode: 'COD',
-      Refr_E: '30',
-      Refr_P: '0',
-    },
-    {
-      Tranid: '1234567890',
-      TranDate: '12/1/2022',
-      Store_name: '1234567890',
-      Category: 'Health',
-      Sub_category: 'Dentist',
-      Bill_amt: '1000',
-      Trans_type: 'Burn',
-      pay_mode: 'COD',
-      Refr_E: '30',
-      Refr_P: '0',
-    },
-
-    {
-      Tranid: '1234567890',
-      TranDate: '12/1/2022',
-      Store_name: '1234567890',
-      Category: 'Health',
-      Sub_category: 'Dentist',
-      Bill_amt: '1000',
-      Trans_type: 'F2F',
-      pay_mode: 'COD',
-      Refr_E: '30',
-      Refr_P: '0',
-    },
-    {
-      Tranid: '1234567890',
-      TranDate: '12/1/2022',
-      Store_name: '1234567890',
-      Category: 'Health',
-      Sub_category: 'Dentist',
-      Bill_amt: '1000',
-      Trans_type: 'Burn',
-      pay_mode: 'COD',
-      Refr_E: '30',
-      Refr_P: '0',
-    },
-    {
-      Tranid: '1234567890',
-      TranDate: '12/1/2022',
-      Store_name: '1234567890',
-      Category: 'Health',
-      Sub_category: 'Dentist',
-      Bill_amt: '1000',
-      Trans_type: 'Burn',
-      pay_mode: 'COD',
-      Refr_E: '30',
-      Refr_P: '0',
-    },
-    ]
-    this.UserorderdataSource = new MatTableDataSource(userorders);
-    this.UserorderdataSource.paginator = this.paginator;
-    this.UserorderdataSource.sort = this.sort;
-
-
-
-
-    const userstrans = [      {
-        Tranid: '1234567890',
-        TranDate: '12/1/2022',
-        Storename: 'Akkad Bakkad..',
-        Trans_type: 'Direct Sale',
-        Refr_E: '25',
-        Refr_P: '25',
-        order_amt: '1000',
-        wal_bal: '10000',
-      },
-      {
-        Tranid: '1234567890',
-        TranDate: '12/1/2022',
-        Storename: 'Akkad Bakkad..',
-        Trans_type: 'POS Sale',
-        Refr_E: '25',
-        Refr_P: '25',
-        order_amt: '1000',
-        wal_bal: '10000',
-      },
-      {
-        Tranid: '1234567890',
-        TranDate: '12/1/2022',
-        Storename: 'Akkad Bakkad..',
-        Trans_type: 'F2F Sale',
-        Refr_E: '25',
-        Refr_P: '25',
-        order_amt: '1000',
-        wal_bal: '10000',
-      },
-      {
-        Tranid: '1234567890',
-        TranDate: '12/1/2022',
-        Storename: 'Akkad Bakkad..',
-        Trans_type: 'Withdrawal',
-        Refr_E: '25',
-        Refr_P: '25',
-        order_amt: '1000',
-        wal_bal: '10000',
-      },
-    ];
-    this.UsertranSource = new MatTableDataSource(userstrans);
-    this.UsertranSource.paginator = this.paginator;
-    this.UsertranSource.sort = this.sort;
-
-
-
-
-    // const userstran = [
-    //   {
-    //     Tranid: '1234567890',
-    //     TranDate: '12/1/2022',
-    //     Store_name: 'Akkad Bakkad..',
-    //     Trans_type: 'Refr Credits',
-    //     Refr_E: '30',
-    //     Refr_P: '0',
-    //     Amt: '1000',
-    //     T_Amt: '1000',
-    //   },
-
-    // ];
-    // this.UsertranSource = new MatTableDataSource(userstran);
-    // this.UsertranSource.paginator = this.paginator;
-    // this.UsertranSource.sort = this.sort;
-
-
+    this.userID = this.actRoute.snapshot.params["id"];
+    this.apiservice.getuserdata(this.userID).pipe().subscribe((userdata: any) => {
+      this.userdata = userdata[0];
+      console.log((this.userdata));
+    });
+  }
+  userorders() {
+    this.apiservice.getRecentAddedOrder(25, false, "by", "==", this.userID).pipe(take(1)).subscribe((recentorders: any) => {
+      // console.log(recentorders)
+      this.orderdataSource = new MatTableDataSource(recentorders);
+      this.orderdataSource.sort = this.sort;
+    });
   }
 
+  tabchange() {
+    console.log(this.mattab?.selectedIndex);
+    if (this.mattab?.selectedIndex == 1) {
+      this.userorders();
+    }
+    else if (this.mattab?.selectedIndex == 2) {
+
+    }
+  }
+
+  openDialog(data:any) {
+    this.dialog.open(TransactionDetailsComponent, {
+      width: '90%',
+      minWidth: '90%',
+      maxWidth: '90%',
+      maxHeight: '80%',
+      hasBackdrop: true,
+      disableClose: false,
+      panelClass: 'dialogLayout',
+      data: {Orderdata:data,id: 1 },
+    });
+  }
 }

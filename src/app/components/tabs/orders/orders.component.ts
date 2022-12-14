@@ -97,7 +97,6 @@ export class OrdersComponent implements OnInit {
 
   ApplyFilter() {
     // this.showerror = false;
-
     // if (this.parameters == "") {
     //   this.showerror = true;
     //   this.errormsg = "Please select the parameter."
@@ -116,8 +115,7 @@ export class OrdersComponent implements OnInit {
   }
 
   execute() {
-    this.apiservice.getRecentAddedOrder(100, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
-      console.log(recentorders)
+    this.apiservice.getRecentAddedOrder(20, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
       this.orderdatasource = new MatTableDataSource(recentorders);
       this.orderdatasource.sort = this.sort;
     });
@@ -125,7 +123,6 @@ export class OrdersComponent implements OnInit {
 
 
   openDialog(data:any) {
-    console.log(data);
     this.dialog.open(TransactionDetailsComponent, {
       width: '90%',
       minWidth: '90%',
@@ -134,14 +131,13 @@ export class OrdersComponent implements OnInit {
       hasBackdrop: true,
       disableClose: false,
       panelClass: 'dialogLayout',
-      data: {Orderdata:data},
+      data: {Orderdata:data,id: 1 },
     });
   }
 
 
   exportexcel() {
     this.apiservice.getRecentAddedOrder(10, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
-      console.log(recentorders.length);
       this.recentorderss = recentorders;
       for (let i = 0; i < this.recentorderss.length; i++) {
         let orderstatus = "";
@@ -158,7 +154,6 @@ export class OrdersComponent implements OnInit {
           ordertype = this.recentorderss[i].journey;
         }
         if (this.recentorderss[i].journey == 'F2F' || this.recentorderss[i].journey == 'DIRECT' || this.recentorderss[i].journey == 'BURN' || this.recentorderss[i].journey == 'POS') {
-          // console.log(this.recentorderss[i].journey);
           if (this.recentorderss[i].cart.length > 0 && ((this.recentorderss[i].ordrTYPE !== 'RefrCASH' && this.recentorderss[i].status == 1) || (this.recentorderss[i].ordrTYPE == 'RefrCASH' && this.recentorderss[i].status == 0))) {
             orderstatus = "Placed";
           }
@@ -211,7 +206,6 @@ export class OrdersComponent implements OnInit {
           Order_status: orderstatus,
         });
       }
-      // console.log("recentorders" + this.excelarr);
       this.excelservice.exportasexcelfile(this.excelarr, "demo");
     });
 

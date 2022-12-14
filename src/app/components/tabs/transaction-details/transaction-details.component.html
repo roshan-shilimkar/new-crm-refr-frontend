@@ -234,9 +234,9 @@
                         -
                     </div>
                     <div class="b5padding">
-                        {{Transactiondata.logistics.addressDrop.address}},
-                        {{Transactiondata.logistics.addressDrop.zip}},
-                        {{Transactiondata.logistics.addressDrop.landmark}}
+                        {{Transactiondata.logistics.addressDrop?.address}},
+                        {{Transactiondata.logistics.addressDrop?.zip}},
+                        {{Transactiondata.logistics.addressDrop?.landmark}}
                     </div>
                 </div>
                 <div class="datacont1" *ngIf="Transactiondata.logistics.addressPick != undefined">
@@ -244,9 +244,9 @@
                 </div>
                 <div class="datacont2 gray_txt">
                     <div>
-                        {{Transactiondata.logistics.addressDrop.address}},
-                        {{Transactiondata.logistics.addressDrop.zip}},
-                        {{Transactiondata.logistics.addressDrop.landmark}}
+                        {{Transactiondata.logistics.addressDrop?.address}},
+                        {{Transactiondata.logistics.addressDrop?.zip}},
+                        {{Transactiondata.logistics.addressDrop?.landmark}}
                     </div>
                 </div>
             </div>
@@ -354,7 +354,7 @@
                     <div class="b5padding">Refr Cash Payment : </div>
                 </div>
                 <div class="datacont2 gray_txt">
-                    <div class="b5padding">{{Transactiondata.done}}</div>
+                    <div class="b5padding">{{Transactiondata.sin.toDate() | date:'dd MMM yyyy'}}</div>
                     <div class="b5padding">#{{Transactiondata.id}}</div>
                     <div class="b5padding">
                         <button mat-button [disabled]="true" class="failed_btn"
@@ -374,8 +374,8 @@
                         Placed
                     </div>
                     <div class="b5padding">
-                        <span *ngIf="Transactiondata.cart !=undefined && Transactiondata.cart.length > 0">Instore</span>
-                        <span *ngIf="Transactiondata.cart !=undefined && Transactiondata.cart.length == 0">Online</span>
+                        <span *ngIf=" Transactiondata.cart.length > 0">Instore</span>
+                        <span *ngIf="Transactiondata.cart.length == 0">Online</span>
                     </div>
                     <div class="b5padding">{{Transactiondata.amTotal}}</div>
                     <div class="b5padding">
@@ -388,7 +388,7 @@
                     </div>
                     <div class="b5padding">
                         <span *ngIf="typeid==1">{{Transactiondata.invoice.amtRefrCash |
-                            number:'1.0-2'}}</span>
+                            number:'1.0-2' || 0}}</span>
                         <span *ngIf="typeid==2">{{Transactiondata.earn | number:'1.0-2'}}</span>
                     </div>
                 </div>

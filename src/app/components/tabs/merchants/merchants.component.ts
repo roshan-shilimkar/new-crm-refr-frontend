@@ -143,7 +143,7 @@ export class MerchantsComponent implements OnInit {
   }
 
   execute() {
-    this.apiservice.getRecentStores(10, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentStore: any) => {
+    this.apiservice.getRecentStores(10000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentStore: any) => {
       console.log(recentStore);
       this.MerchantdataSource = new MatTableDataSource(recentStore);
       this.MerchantdataSource.sort = this.sort;
@@ -151,7 +151,7 @@ export class MerchantsComponent implements OnInit {
   }
 
   exportexcel() {
-    this.apiservice.getRecentStores(10, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentStore: any) => {
+    this.apiservice.getRecentStores(100, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentStore: any) => {
       console.log(recentStore);
       for (let i = 0; i < recentStore.length; i++) {
         this.excelarr.push({

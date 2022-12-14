@@ -20,11 +20,14 @@ export class UsersComponent implements OnInit {
   errormsg: string = "";
   searchvalue: any;
   inputtype: any;
+  
   usercolumn: string[] = [
     'User_id',
     'User_name',
     'User_contact',
-    'Refr_E',
+    'Refr_B',
+    'Refr_R',
+    'Store_linked',
     'action',
   ];
 

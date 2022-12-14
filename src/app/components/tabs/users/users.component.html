@@ -1,12 +1,6 @@
 <div class="A20padding">
     <div class="dflex">
         <span class="xxl_size boldtext r15padding AScenter">Users</span>
-        <!-- <div>
-            <mat-form-field appearance="outline" class="crminput crmsearch">
-                <input matInput placeholder="Search">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-        </div> -->
         <span class="divide"></span>
         <div class="AScenter">
             <mat-checkbox class="example-margin" [(ngModel)]="getall">Get All</mat-checkbox>
@@ -25,7 +19,7 @@
     </div>
     <div>
         <mat-form-field class="crminput l5margin r5margin filterinput" appearance="outline">
-            <mat-select placeholder="Filter Type" [(ngModel)]="parameters" >
+            <mat-select placeholder="Filter Type" [(ngModel)]="parameters">
                 <mat-option *ngFor="let item of ParaArr" [value]="item.titvalue">
                     {{item.Title}}
                 </mat-option>
@@ -46,16 +40,15 @@
         {{errormsg}}
     </div>
     <div class="c_align">
-        <Button class="viewbtn t10padding b10padding l30padding r30padding t10margin b15margin" (click)="ApplyFilter()">Apply Filter</Button>
+        <Button class="viewbtn t10padding b10padding l30padding r30padding t10margin b15margin"
+            (click)="ApplyFilter()">Apply Filter</Button>
     </div>
-    
     <div>
-
         <table class="crmtable" mat-table [dataSource]="UserdataSource" matSort>
             <ng-container matColumnDef="User_id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">User ID</th>
                 <td mat-cell *matCellDef="let row,let i =index">
-                    <div class="gray_txt xxs_size">{{row.sin.toDate() | date:'dd MMM yy hh:mm a'}}</div>
+                    <div class="gray_txt xxs_size">{{row.uid}}</div>
                 </td>
             </ng-container>
             <ng-container matColumnDef="User_name">
@@ -68,30 +61,29 @@
                 <td mat-cell *matCellDef="let row">
                     <div *ngIf="row.phone != '' || row.phone != undefined">{{row.phone}}</div>
                     <div *ngIf="row.email != '' || row.email != undefined">{{row.email}}</div>
-
                 </td>
             </ng-container>
-            <!-- <ng-container matColumnDef="city">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">City</th>
-                <td mat-cell *matCellDef="let row">
-                    -
-                </td>
-            </ng-container> -->
-            <!-- <ng-container matColumnDef="level">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">Level</th>
-                <td mat-cell *matCellDef="let row">
-                    -
-                </td>
-            </ng-container> -->
-            <ng-container matColumnDef="Refr_E">
+            <ng-container matColumnDef="Refr_B">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">Refr Cash Balance</th>
                 <td mat-cell *matCellDef="let row">{{row.acBalC | number: '1.0-2'}}</td>
             </ng-container>
-
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading"> Action </th>
+            <ng-container matColumnDef="Refr_R">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">Refr Cash Reserve</th>
+                <td mat-cell *matCellDef="let row">{{row.acBalCr | number: '1.0-2'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Store_linked">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">Store Linked</th>
                 <td mat-cell *matCellDef="let row">
-                    <a>
+                    <p *ngIf="!row.storeLoc || !row.storeLoc?.length">No Store</p>
+                    <a mat-icon-button *ngIf="row.storeLoc?.length > 0" [routerLink]=" '/store/' + row.storeLoc[0] ">
+                        <mat-icon>store</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading">Action</th>
+                <td mat-cell *matCellDef="let row">
+                    <a [routerLink]=" '/userProfile/' + row.uid ">
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.125" y="0.125" width="24.75" height="24.75" fill="#DCCE8D" />
                             <g clip-path="url(#clip0_1979_8859)">
