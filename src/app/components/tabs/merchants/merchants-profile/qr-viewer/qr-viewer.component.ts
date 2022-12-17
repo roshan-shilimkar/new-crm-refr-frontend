@@ -37,8 +37,6 @@ export class QrViewerComponent implements OnInit {
   }
 
   async execute(x:string){
-    console.log("-------------------------------------------")
-    console.log(x);
     if(x){
       this.qrCode = await new QRCodeStyling({
         width: 248,

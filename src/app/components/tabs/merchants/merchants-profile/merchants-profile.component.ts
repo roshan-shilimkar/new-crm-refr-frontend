@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Index } from 'firebase/firestore';
 import { take } from 'rxjs';
 import { ApiserviceService } from 'src/app/apiservice.service';
+import { AuthService } from 'src/app/auth.service';
 
 import * as XLSX from 'xlsx';
 import { TransactionDetailsComponent } from '../../transaction-details/transaction-details.component';
@@ -19,6 +20,7 @@ import { TransactionDetailsComponent } from '../../transaction-details/transacti
 })
 export class MerchantsProfileComponent implements OnInit {
   indexs: number = 0;
+  catindex: number = 0;
   listLoc: any[] = [];
   @ViewChild('MatTabGroupss') mattab?: MatTabGroup;
 
@@ -85,8 +87,9 @@ export class MerchantsProfileComponent implements OnInit {
     'Tamount',
     'PaymentMode',
     'SwBalance',
-  ]
-
+  ];
+  Selcategory: string = "";
+  Selsubcategory: string = "";
   CampdataSource!: MatTableDataSource<any>;
   SubdataSource!: MatTableDataSource<any>;
   ProductdataSource!: MatTableDataSource<any>;
@@ -97,10 +100,12 @@ export class MerchantsProfileComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   storeID: string = "";
+  storeuid:string = "";
   storeDetails: any;
   storeinfoDetails: any;
   productList: Array<any> = [];
-  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService,private dialog :MatDialog) {
+  // catindex:number;
+  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService, private dialog: MatDialog, public auth: AuthService) {
     this.execute();
   }
 
@@ -120,9 +125,14 @@ export class MerchantsProfileComponent implements OnInit {
         const store: any = storeRef.exists() ? storeRef.data() : null;
         this.storeDetails = store;
         this.listLoc = store.loc;
-
+        this.Selcategory = store.cat;
+        this.Selsubcategory = store.subCat;
+        this.catindex = this.auth.resource.categoryList.findIndex((data: any) => {
+          return data.id == store.cat
+        });
         this.apiservice.getUserByUID(store.by).then(storeuser => {
           const storeuserD: any = storeuser.exists() ? storeuser.data() : null;
+          this.storeuid = storeuserD.uid;
           this.storeinfoDetails = storeuserD;
         })
       })
@@ -151,6 +161,8 @@ export class MerchantsProfileComponent implements OnInit {
   }
 
   tabchange() {
+    console.log(this.mattab?.selectedIndex);
+    
     if (this.mattab?.selectedIndex == 2) {
       this.getcampaign();
     }
@@ -178,7 +190,8 @@ export class MerchantsProfileComponent implements OnInit {
   }
 
   getorders() {
-    this.apiservice.getRecentAddedOrder(100, true, "sid", "==", this.storeID).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid).pipe(take(1)).subscribe((recentorders: any) => {
+      console.log(recentorders);
       this.orderdataSource = new MatTableDataSource(recentorders);
       this.orderdataSource.sort = this.sort;
     });
@@ -212,14 +225,14 @@ export class MerchantsProfileComponent implements OnInit {
           if (element.indexOf("Specification") >= 0) {
             console.log(element)
           }
-          element.indexOf("Specification") >= 0 ? (data[i][+indexs] !== "-" ? spec.push({ [element.substring(element.indexOf("(")+1,element.indexOf(")"))]: data[i][+indexs] }) : "") : ""
+          element.indexOf("Specification") >= 0 ? (data[i][+indexs] !== "-" ? spec.push({ [element.substring(element.indexOf("(") + 1, element.indexOf(")"))]: data[i][+indexs] }) : "") : ""
         })
         this.productList.push({
           "ProductName": data[i][0],
           "MRP": data[i][1],
           "Price": data[i][2],
-          "Category":data[i][3],
-          "HSN CODE":data[i][4],
+          "Category": data[i][3],
+          "HSN CODE": data[i][4],
           "Description": desc,
           "Specification": spec,
         })
@@ -228,7 +241,7 @@ export class MerchantsProfileComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
   }
 
-  openDialog(data:any) {
+  openDialog(data: any) {
     this.dialog.open(TransactionDetailsComponent, {
       width: '90%',
       minWidth: '90%',
@@ -237,7 +250,7 @@ export class MerchantsProfileComponent implements OnInit {
       hasBackdrop: true,
       disableClose: false,
       panelClass: 'dialogLayout',
-      data: {Orderdata:data,id: 1 },
+      data: { Orderdata: data, id: 1 },
     });
   }
 

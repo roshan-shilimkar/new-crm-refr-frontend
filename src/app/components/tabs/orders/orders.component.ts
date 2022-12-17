@@ -115,7 +115,8 @@ export class OrdersComponent implements OnInit {
   }
 
   execute() {
-    this.apiservice.getRecentAddedOrder(20, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(100, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+      console.log(recentorders);
       this.orderdatasource = new MatTableDataSource(recentorders);
       this.orderdatasource.sort = this.sort;
     });

@@ -107,17 +107,22 @@ export class ApiserviceService {
     return collectionData(qu)
   }
 
+
   getRecentAddedOrder(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
+
     const catData: CollectionReference = collection(this.firestore, `${'walt'}`);
     let Parametere: WhereFilterOp = Para;
     let conditions: WhereFilterOp = operator;
     var qu;
     let orderbyvalue = "sin";
+    
     if (operator == "!==" || operator == ">" || operator == "<" || operator == ">=" || operator == "<=") {
       orderbyvalue = Para;
     }
     if (getall == true) {
       if (Parametere != undefined && operator != undefined && value != undefined) {
+        console.log(1);
+        
         qu = query(catData,
           where(Parametere, conditions, value),
           where("type", 'array-contains', "storeORDER"),
@@ -134,6 +139,11 @@ export class ApiserviceService {
     }
     else {
       if (Parametere != undefined && operator != undefined && value != undefined) {
+        console.log("parameter = "+ Parametere);
+        console.log("operator = "+ operator);
+        console.log("value = "+ value);
+        console.log("orderbyvalue = "+ orderbyvalue);
+
         qu = query(catData,
           where(Parametere, conditions, value),
           where("type", 'array-contains', "storeORDER"),
@@ -143,6 +153,8 @@ export class ApiserviceService {
         );
       }
       else {
+        console.log(4);
+
         qu = query(catData,
           where("type", 'array-contains', "storeORDER"),
           orderBy(orderbyvalue, "desc"),

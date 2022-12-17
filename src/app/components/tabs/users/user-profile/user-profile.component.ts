@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
   }
   userorders() {
     this.apiservice.getRecentAddedOrder(25, false, "by", "==", this.userID).pipe(take(1)).subscribe((recentorders: any) => {
-      // console.log(recentorders)
+      console.log(recentorders)
       this.orderdataSource = new MatTableDataSource(recentorders);
       this.orderdataSource.sort = this.sort;
     });
