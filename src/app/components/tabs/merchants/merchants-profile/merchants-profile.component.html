@@ -752,7 +752,7 @@
 
 
 
-            <mat-tab label="Campaign's">
+            <mat-tab label="Campaign">
                 <div class="A15padding">
                     <div>
                         <table class="crmtable t10margin" mat-table [dataSource]="CampaigndataSource" matSort>
@@ -827,7 +827,7 @@
                             </ng-container>
                             <ng-container matColumnDef="Status">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    Existing User
+                                   Status
                                 </th>
                                 <td mat-cell *matCellDef="let row" class="A10padding">
                                     <span
@@ -881,7 +881,7 @@
                     <table class="crmtable t10margin" mat-table [dataSource]="ProductdataSource" matSort>
                         <ng-container matColumnDef="Product">
                             <th class="M40width" mat-header-cell *matHeaderCellDef mat-sort-header>
-                                Personal Info
+                                Product Info
                             </th>
                             <td mat-cell *matCellDef="let row" class="A10padding">
                                 <div class="dflex">
@@ -958,6 +958,12 @@
                                         Requested For Exclusive
                                     </span>
                                 </div>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                            <td mat-cell class="A10padding" *matCellDef="let row">
+                                <mat-slide-toggle></mat-slide-toggle>
                             </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="ProdColumns"></tr>

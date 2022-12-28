@@ -53,6 +53,7 @@ export class MerchantsProfileComponent implements OnInit {
     'Qty',
     'action',
     'Request',
+    'status'
   ];
 
   Ordercolumns: string[] = [

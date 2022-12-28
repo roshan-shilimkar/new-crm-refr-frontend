@@ -109,7 +109,6 @@ export class ApiserviceService {
 
 
   getRecentAddedOrder(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
-
     const catData: CollectionReference = collection(this.firestore, `${'walt'}`);
     let Parametere: WhereFilterOp = Para;
     let conditions: WhereFilterOp = operator;
