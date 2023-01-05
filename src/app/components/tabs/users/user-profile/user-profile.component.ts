@@ -77,19 +77,16 @@ export class UserProfileComponent implements OnInit {
     this.userID = this.actRoute.snapshot.params["id"];
     this.apiservice.getuserdata(this.userID).pipe().subscribe((userdata: any) => {
       this.userdata = userdata[0];
-      console.log((this.userdata));
     });
   }
   userorders() {
     this.apiservice.getRecentAddedOrder(25, false, "by", "==", this.userID).pipe(take(1)).subscribe((recentorders: any) => {
-      console.log(recentorders)
       this.orderdataSource = new MatTableDataSource(recentorders);
       this.orderdataSource.sort = this.sort;
     });
   }
 
   tabchange() {
-    console.log(this.mattab?.selectedIndex);
     if (this.mattab?.selectedIndex == 1) {
       this.userorders();
     }

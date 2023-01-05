@@ -78,6 +78,8 @@ export class ResourceService {
 
 
   getCat(catX: string, subCatX: string) {
+    console.log("category list")
+    console.log(this.categoryList);
     const cat = this.categoryList[this.categoryList.findIndex((x: any) => x.id == catX)];
     if (!subCatX) {
       return cat.title
@@ -159,7 +161,6 @@ export class ResourceService {
   //   navigator.clipboard.writeText(mes);
   // }
   copyClipboard(text: any) {
-    console.log(text)
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -177,7 +178,6 @@ export class ResourceService {
   compareDates(date1: any) {
     const dateX = Date.parse(date1);
     const date2 = Date.now();
-    //console.log(dateX, date2)
     return dateX > date2;
   }
 

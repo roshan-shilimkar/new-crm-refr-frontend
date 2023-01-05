@@ -15,7 +15,6 @@ export class AppComponent {
   getcat() {
     this.auth.getCategoryList().pipe(take(1)).subscribe(cat => {
       this.auth.resource.categoryList = cat;
-      console.log(cat)
     })
   }
 }

@@ -15,7 +15,7 @@
                                 </div>
                                 <span class="divide"></span>
                                 <div>
-                                    {{storeDetails.id}}
+                                    {{storeDetails?.id}}
                                 </div>
                             </div>
                             <div class="dflex t5padding">
@@ -24,7 +24,7 @@
                                 </div>
                                 <span class="divide"></span>
                                 <div>
-                                    {{storeinfoDetails.acBalVr | number:'1.0-2'}}
+                                    {{storeinfoDetails?.acBalVr | number:'1.0-2'}}
                                 </div>
                             </div>
                             <div class="dflex t5padding">
@@ -33,7 +33,7 @@
                                 </div>
                                 <span class="divide"></span>
                                 <div>
-                                    {{storeinfoDetails.acBalVr | number:'1.0-2'}}
+                                    {{storeinfoDetails?.acBalVr | number:'1.0-2'}}
                                 </div>
                             </div>
                             <div class="dflex t5padding">
@@ -42,7 +42,7 @@
                                 </div>
                                 <span class="divide"></span>
                                 <div>
-                                    {{storeinfoDetails.acBalH | number:'1.0-2'}}
+                                    {{storeinfoDetails?.acBalH | number:'1.0-2'}}
                                 </div>
                             </div>
                             <div class="t10padding b10padding">
@@ -54,22 +54,22 @@
                             Store Logo
                         </div>
                         <div class="cardbox storelogo OF_hidden">
-                            <img class="M100width" [src]="storeDetails.logo" />
+                            <img class="M100width" [src]="storeDetails?.logo" />
                         </div>
                         <div class="M_size normaltext t20padding b10padding">
                             Store Banner
                         </div>
                         <div class="cardbox storebanner OF_hidden">
-                            <img class="M100width" [src]="storeDetails.banner" />
+                            <img class="M100width" [src]="storeDetails?.banner" />
                         </div>
                         <div class="M_size normaltext t20padding b10padding">
                             Store Photos
                         </div>
                         <div class="cardbox storebanner OF_hidden">
-                            <img class="M100width" [src]="storeDetails.banners[indexs]" />
+                            <img class="M100width" [src]="storeDetails?.banners[indexs]" />
                         </div>
                         <div class="c_align tb10padding">
-                            <span *ngFor="let item of storeDetails.banners;let i = index" class="dot"
+                            <span *ngFor="let item of storeDetails?.banners;let i = index" class="dot"
                                 (click)="indexs = i"></span>
                         </div>
                         <div class="dflex JCcenter t10margin b5margin">
@@ -83,18 +83,18 @@
                         <div class="M_size normaltext t20padding b10padding">
                             POS
                         </div>
-                        <app-qr-viewer [id]=" storeDetails.id " [name]=" storeDetails.name " [qrWhat]=" 'POS' "
-                            [qrLINK]=" storeDetails.shareUrlV1 "></app-qr-viewer>
+                        <app-qr-viewer [id]=" storeDetails?.id " [name]=" storeDetails?.name " [qrWhat]=" 'POS' "
+                            [qrLINK]=" storeDetails?.shareUrlV1 "></app-qr-viewer>
                         <div class="M_size normaltext t20padding b10padding">
                             Invoice
                         </div>
-                        <app-qr-viewer [id]=" storeDetails.id " [name]=" storeDetails.name " [qrWhat]=" 'Invoice' "
-                            [qrLINK]=" storeDetails.shareUrlB1 "></app-qr-viewer>
+                        <app-qr-viewer [id]=" storeDetails?.id " [name]=" storeDetails?.name " [qrWhat]=" 'Invoice' "
+                            [qrLINK]=" storeDetails?.shareUrlB1 "></app-qr-viewer>
                         <div class="M_size normaltext t20padding b10padding">
                             Subs
                         </div>
-                        <app-qr-viewer [id]=" storeDetails.id " [name]=" storeDetails.name " [qrWhat]=" 'Subs' "
-                            [qrLINK]=" storeDetails.shareUrlX1 "></app-qr-viewer>
+                        <app-qr-viewer [id]=" storeDetails?.id " [name]=" storeDetails?.name " [qrWhat]=" 'Subs' "
+                            [qrLINK]=" storeDetails?.shareUrlX1 "></app-qr-viewer>
                     </div>
                     <div class="S_section l15padding">
                         <div class="dflex M100width">
@@ -171,7 +171,7 @@
                                 <mat-form-field class="crminput crmsearch filterinput" appearance="outline">
                                     <mat-select placeholder="Category" [(ngModel)]="Selcategory">
                                         <div *ngFor="let item of auth.resource.categoryList">
-                                            <mat-option [value]="item.id">
+                                            <mat-option [value]="item?.id">
                                                 {{item.title}}
                                             </mat-option>
                                         </div>
@@ -198,7 +198,7 @@
                                 <mat-form-field class="crminput crmsearch filterinput" appearance="outline">
                                     <mat-select placeholder="Sub-Category" [(ngModel)]="Selsubcategory">
                                         <!-- <div *ngFor="let item of auth.resource.categoryList[catindex].items">
-                                            <mat-option [value]="item.id">
+                                            <mat-option [value]="item?.id">
                                                 {{item.name}}
                                             </mat-option>
                                         </div> -->
@@ -761,7 +761,7 @@
                                     Name
                                 </th>
                                 <td mat-cell *matCellDef="let row" class="A10padding">
-                                    {{row.name}}
+                                    {{row?.name}}
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="Camp_min">
@@ -1131,11 +1131,11 @@
                                 <div class="AScenter l15padding">
                                     <div>
                                         Store Wallet: <span>
-                                            {{storeinfoDetails.acBalVr | number:'1.0-2'}}
+                                            {{storeinfoDetails?.acBalVr | number:'1.0-2'}}
                                         </span>
                                     </div>
                                     <div>To be credited: <span>
-                                            {{storeinfoDetails.acBalVr | number:'1.0-2'}}
+                                            {{storeinfoDetails?.acBalVr | number:'1.0-2'}}
                                         </span>
                                     </div>
                                 </div>
@@ -1164,7 +1164,7 @@
                                 <div class="AScenter l15padding">
                                     <div>
                                         Campaign Wallet: <span>
-                                            {{storeinfoDetails.acBalH | number:'1.0-2'}}
+                                            {{storeinfoDetails?.acBalH | number:'1.0-2'}}
                                         </span>
                                     </div>
                                     <!-- <div>Last Campign Refill: <span>23/2/2022</span></div> -->

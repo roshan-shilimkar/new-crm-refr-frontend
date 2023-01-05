@@ -85,20 +85,17 @@ export class NotificationComponent implements OnInit {
 
 
   doSomething() {
-    console.log("CustOrMech = " + this.CustOrMech);
     this.filters = this.CustOrMech == 0 ? this.CustFilter : this.MerchFilter;
   }
 
   Filtersnamechange() {
     this.Filtervalue = undefined;
     this.typeoffilterinput = this.FIlterName.type;
-    console.log(this.typeoffilterinput);
   }
 
 
 
   sendwhatsappNotification() {
-    console.log(1);
     let headers = new HttpHeaders({
       'Authorization':
         'Bearer EAALVbJlELqEBAPO9MUrJlgL0ZB2yZBpEXbbrGUX4CmQQyZAfx29F7awJZB7nkxZA4J1H0oaOQo0ZCjKtWsYvILziB1lpd0J0sAHuIUcy02ZCG3ZCMsneeSdZCPrZBXDh0QoetTDyKXc0ODlgPjD1soavhDLeb8pZAxzOtd8qLLuwgZC0spZCeZAHZBX4PZB2r2EZC4kPSdHd6oQsW6abSSAZDZD',
@@ -134,8 +131,6 @@ export class NotificationComponent implements OnInit {
         { headers }
       )
       .subscribe((data) => {
-        // this.postId = data.id;
-        console.log('Success');
       });
 
   }

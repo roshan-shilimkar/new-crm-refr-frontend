@@ -75,7 +75,6 @@ export class QrViewerComponent implements OnInit {
   }
 
   download(extension:string, id:string, name:string) {
-    console.log("download click");
     if(extension){
       try{
         this.qrCode.download(

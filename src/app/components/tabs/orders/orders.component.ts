@@ -83,7 +83,7 @@ export class OrdersComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   excelarr: Array<any> = [];
   constructor(
-    private apiservice: ApiserviceService, private excelservice: ExcelexportService,private dialog :MatDialog
+    private apiservice: ApiserviceService, private excelservice: ExcelexportService, private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -110,20 +110,19 @@ export class OrdersComponent implements OnInit {
     //   this.errormsg = "Please Enter the value in input Box.";
     // }
     // else {
-      this.execute();
+    this.execute();
     // }
   }
 
   execute() {
     this.apiservice.getRecentAddedOrder(100, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
-      console.log(recentorders);
       this.orderdatasource = new MatTableDataSource(recentorders);
       this.orderdatasource.sort = this.sort;
     });
   }
 
 
-  openDialog(data:any) {
+  openDialog(data: any) {
     this.dialog.open(TransactionDetailsComponent, {
       width: '90%',
       minWidth: '90%',
@@ -132,13 +131,14 @@ export class OrdersComponent implements OnInit {
       hasBackdrop: true,
       disableClose: false,
       panelClass: 'dialogLayout',
-      data: {Orderdata:data,id: 1 },
+      data: { Orderdata: data, id: 1 },
     });
   }
 
 
   exportexcel() {
     this.apiservice.getRecentAddedOrder(10, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+      this.recentorderss = "";
       this.recentorderss = recentorders;
       for (let i = 0; i < this.recentorderss.length; i++) {
         let orderstatus = "";

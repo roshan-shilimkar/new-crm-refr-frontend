@@ -321,14 +321,12 @@ export class ApiserviceService {
 
   getFormData(c: number, paravalue: string, tab: any) {
     console.log('BILL ME');
-    // console.log('data' + paravalue);
 
     const catData: CollectionReference = collection(
       this.firestore,
       `${'reminders'}`
     );
     if (tab) {
-      // console.log(tab);
       const qu = query(
         catData,
         orderBy('date', 'desc'),

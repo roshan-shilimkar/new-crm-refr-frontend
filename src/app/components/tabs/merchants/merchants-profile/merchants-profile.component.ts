@@ -128,9 +128,14 @@ export class MerchantsProfileComponent implements OnInit {
         this.listLoc = store.loc;
         this.Selcategory = store.cat;
         this.Selsubcategory = store.subCat;
-        this.catindex = this.auth.resource.categoryList.findIndex((data: any) => {
-          return data.id == store.cat
-        });
+        console.log("category list");
+        console.log(store.cat);
+        console.log(this.auth.resource.categoryList);
+        this.catindex = this.auth.resource.categoryList.indexOf((x:any)=>{
+          x.id == store.cat;
+        })
+        console.log(this.catindex);
+        
         this.apiservice.getUserByUID(store.by).then(storeuser => {
           const storeuserD: any = storeuser.exists() ? storeuser.data() : null;
           this.storeuid = storeuserD.uid;
@@ -161,9 +166,8 @@ export class MerchantsProfileComponent implements OnInit {
     this.ProductdataSource.sort = this.sort;
   }
 
+
   tabchange() {
-    console.log(this.mattab?.selectedIndex);
-    
     if (this.mattab?.selectedIndex == 2) {
       this.getcampaign();
     }
@@ -192,7 +196,6 @@ export class MerchantsProfileComponent implements OnInit {
 
   getorders() {
     this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid).pipe(take(1)).subscribe((recentorders: any) => {
-      console.log(recentorders);
       this.orderdataSource = new MatTableDataSource(recentorders);
       this.orderdataSource.sort = this.sort;
     });
@@ -224,7 +227,6 @@ export class MerchantsProfileComponent implements OnInit {
         spec = [];
         data[0].forEach((element: string, indexs: Index) => {
           if (element.indexOf("Specification") >= 0) {
-            console.log(element)
           }
           element.indexOf("Specification") >= 0 ? (data[i][+indexs] !== "-" ? spec.push({ [element.substring(element.indexOf("(") + 1, element.indexOf(")"))]: data[i][+indexs] }) : "") : ""
         })
