@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddnodeComponent } from './components/clientside/nodemanagement/addnode/addnode.component';
+import { NodemanagementComponent } from './components/clientside/nodemanagement/nodemanagement.component';
 import { DashboardComponent } from './components/tabs/dashboard/dashboard.component';
 import { MerchantsProfileComponent } from './components/tabs/merchants/merchants-profile/merchants-profile.component';
 import { MerchantsComponent } from './components/tabs/merchants/merchants.component';
@@ -14,8 +16,10 @@ import { WebsiteformComponent } from './components/tabs/websiteform/websiteform.
 
 const routes: Routes = [
   {
-    path: '', component: TabsComponent, children: [
-      { path: '', redirectTo: '/Dash', pathMatch: "full" },
+    path: '',
+    component: TabsComponent,
+    children: [
+      { path: '', redirectTo: '/Dash', pathMatch: 'full' },
       { path: 'websiteform', component: WebsiteformComponent },
       { path: 'orders', component: OrdersComponent },
       { path: 'Dash', component: DashboardComponent },
@@ -26,12 +30,19 @@ const routes: Routes = [
       { path: 'Redeemreq', component: RedeemreqComponent },
       { path: 'transaction', component: TransactionComponent },
       { path: 'Notification', component: NotificationComponent },
-    ]
-  }
+      {
+        path: 'nodemanage',
+        component: NodemanagementComponent,
+        // children: [{ path: 'addnode', component: AddnodeComponent }],
+      },
+      { path: 'addnode', component: AddnodeComponent },
+      // { path: 'homescreen', component: HomescreenComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

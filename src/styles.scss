@@ -1,12 +1,18 @@
-@use '@angular/material' as mat;
+// import select css
+@use "@angular/material" as mat;
 @include mat.core();
 $crm-main-primary: mat.define-palette(mat.$indigo-palette);
 $crm-main-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $crm-main-warn: mat.define-palette(mat.$red-palette);
-$crm-main-theme: mat.define-light-theme((color: (primary: $crm-main-primary,
-        accent: $crm-main-accent,
-        warn: $crm-main-warn,
-      )));
+$crm-main-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $crm-main-primary,
+      accent: $crm-main-accent,
+      warn: $crm-main-warn,
+    ),
+  )
+);
 @include mat.all-component-themes($crm-main-theme);
 
 html,
@@ -18,7 +24,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 
 .boldtext {
   font-weight: bolder !important;
@@ -125,7 +130,7 @@ body {
 }
 
 .Aborder {
-  border: 1px solid #c3b4b4 !important
+  border: 1px solid #c3b4b4 !important;
 }
 
 .nopadding {
@@ -142,6 +147,11 @@ body {
   padding-right: 0px !important;
 }
 
+.tb2padding {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
 .tb5padding {
   padding-top: 5px !important;
   padding-bottom: 5px !important;
@@ -155,6 +165,16 @@ body {
 .lr10padding {
   padding-left: 10px !important;
   padding-right: 10px !important;
+}
+
+.lr15padding {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.lr20padding {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .t0padding {
@@ -328,7 +348,7 @@ body {
 }
 
 .r2margin {
-  margin-right: px !important;
+  margin-right: 2px !important;
 }
 
 .t5margin {
@@ -367,8 +387,27 @@ body {
   margin-top: 15px !important;
 }
 
+.t20margin {
+  margin-top: 20px !important;
+}
+
+.t30margin {
+  margin-top: 30px !important;
+}
+
+.t40margin {
+  margin-top: 40px !important;
+}
+
+.t50margin {
+  margin-top: 50px !important;
+}
+
 .b15margin {
   margin-bottom: 15px !important;
+}
+.b20margin {
+  margin-bottom: 20px !important;
 }
 
 .l15margin {
@@ -377,6 +416,10 @@ body {
 
 .r15margin {
   margin-right: 15px !important;
+}
+
+.r50margin {
+  margin-right: 50px !important;
 }
 
 .b60margin {
@@ -448,28 +491,40 @@ body {
   flex: 1 1 auto;
 }
 
+.black_text {
+  color: #000000;
+}
+
+.custom_gray {
+  background: #fbf8ff;
+}
+
 .gray_txt {
   color: #848484;
 }
 
+.lightgray_bg {
+  background-color: lightgray;
+}
+
 .White_txt {
-  color: #FFF;
+  color: #fff;
 }
 
 .green_txt {
-  color: #27AE60;
+  color: #27ae60;
 }
 
 .yellow_txt {
-  color: #BAB42C;
+  color: #bab42c;
 }
 
 .ora_txt {
-  color: #CE7712;
+  color: #ce7712;
 }
 
 .blue_txt {
-  color: #336DB1;
+  color: #336db1;
 }
 
 .purple_txt {
@@ -477,7 +532,7 @@ body {
 }
 
 .red_txt {
-  color: #D43B26;
+  color: #d43b26;
 }
 
 .dflex {
@@ -485,27 +540,31 @@ body {
 }
 
 .redTran {
-  background-color: #FFF4F4;
-  color: #FF5353;
+  background-color: #fff4f4;
+  color: #ff5353;
 }
 
 .green_Tran {
-  background-color: #EBFFEF;
-  color: #00C92C;
+  background-color: #ebffef;
+  color: #00c92c;
 }
 
 .ora_tran {
-  background-color: #FFF3E6;
-  color: #CE7712;
+  background-color: #fff3e6;
+  color: #ce7712;
 }
 
 .gray_tran {
-  background-color: #F0F0F0;
-  color: #9C9C9C;
+  background-color: #f0f0f0;
+  color: #9c9c9c;
 }
 
 .AScenter {
   align-self: center !important;
+}
+
+.AIcenter {
+  align-items: center !important;
 }
 
 .JCcenter {
@@ -516,9 +575,12 @@ body {
   justify-content: space-between !important;
 }
 
-
 .A5radius {
   border-radius: 5px;
+}
+
+.A20radius {
+  border-radius: 20px !important;
 }
 
 .OF_hidden {
@@ -532,7 +594,7 @@ body {
   border-radius: 10px;
 
   .mat-header-row {
-    background: #F2F2F2;
+    background: #f2f2f2;
     font-weight: bold;
   }
 
@@ -552,7 +614,7 @@ body {
 }
 
 .active {
-  background: #27FB6B;
+  background: #27fb6b;
 }
 
 .purple_background {
@@ -573,7 +635,7 @@ body {
   font-size: 12px;
   text-decoration: none;
   background: #874bf9;
-  color: #FFF;
+  color: #fff;
   border-radius: 5px;
 }
 
@@ -605,7 +667,7 @@ body {
 }
 
 .orange_background {
-  background: linear-gradient(90.17deg, #FF6A54 -4.31%, #FF4064 104.75%);
+  background: linear-gradient(90.17deg, #ff6a54 -4.31%, #ff4064 104.75%);
 }
 
 .searchinput .mat-form-field-appearance-fill {
@@ -620,6 +682,10 @@ body {
   text-decoration: line-through !important;
 }
 
+.text_decoration_none {
+  text-decoration: none !important;
+}
+
 .Ascenter {
   align-self: center !important;
 }
@@ -631,4 +697,61 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 16px;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  transition: 5ms ease-in;
+}
+
+.mat-drawer-container {
+  background-color: #ffffff;
+}
+
+.cursor_pointer {
+  cursor: pointer;
+}
+
+.mat-form-field {
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.crud_ctas {
+  padding: 10px 30px !important;
+}
+
+.d_inline {
+  display: inline;
+}
+
+// ng-select csss
+
+.multiselect-dropdown {
+  width: 50% !important;
+  .dropdown-btn {
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    padding: 10px !important;
+  }
+  .dropdown-multiselect__caret {
+    right: 0px !important;
+    top: 4px !important;
+  }
+  span {
+    padding: 0 !important;
+  }
+}
+
+.input_search {
+  ul {
+    padding: 0 30px;
+    border: 1px solid;
+    display: block;
+    width: 50%;
+    background: white;
+    list-style: none;
+    li {
+    }
+  }
 }
