@@ -3,7 +3,7 @@
         <span class="xxl_size boldtext r15padding AScenter">Node management</span>
         <span class="divide"></span>
         <div class="AScenter">
-            <button mat-button routerLink="/addnode"
+            <button mat-button [routerLink]="'/addnode/' + 1"
                 class="s_size semiboldtext purple_background normallineheight tb5padding l15padding r15padding White_txt">
                 <mat-icon class="xml_size">add</mat-icon>
                 Add node
@@ -38,7 +38,7 @@
                     </th>
                     <td class="rborder tborder" mat-cell *matCellDef="let row">
                         <div class="d_inline lightgray_bg tb5padding lr15padding A20radius">
-                            {{row.areaList}}
+                            {{row.areaList[0].item_text}}
                         </div>
                     </td>
                 </ng-container>
@@ -46,7 +46,7 @@
                 <ng-container matColumnDef="used_in">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder tborder">Used in
                     </th>
-                    <td class="rborder tborder" mat-cell *matCellDef="let row"> {{row.used_in}} </td>
+                    <td class="rborder tborder" mat-cell *matCellDef="let row"> {{row.used_in[0].item_text}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">
@@ -55,7 +55,7 @@
                     </th>
                     <td class="rborder lborder tborder dflex JCcenter M100width tb10padding" mat-cell
                         *matCellDef="let row">
-                        <a [routerLink]="" class="text_decoration_none r50margin purple_txt cursor_pointer">
+                        <a class="text_decoration_none r50margin purple_txt cursor_pointer">
                             <svg class="M50width" width="28" height="28" viewBox="0 0 28 28" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -67,7 +67,7 @@
                             </svg>
                             <div class="s_size semiboldtext">Preview</div>
                         </a>
-                        <a class="text_decoration_none black_text cursor_pointer" routerLink="/addnode"
+                        <a class="text_decoration_none black_text cursor_pointer" [routerLink]="'/addnode/' + row.id"
                             [queryParams]="{ id: row.id }">
                             <svg class="M70width" width="28" height="28" viewBox="0 0 28 28" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

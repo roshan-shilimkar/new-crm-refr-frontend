@@ -17,23 +17,13 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./addnode.component.scss'],
 })
 export class AddnodeComponent implements OnInit {
-  // 2option s
+  usedInList: any = [];
+  usedInListItems: any = [];
+  usedInSetting!: IDropdownSettings;
 
-  id?: number;
-  name?: string;
-
-  Skill: Array<any> = [
-    {
-      id: 1,
-      name: 'Vileparle East 400057',
-    },
-    {
-      id: 2,
-      name: 'Santacruz East 400056',
-    },
-  ];
-
-  // 2option e
+  dropdownList: any = [];
+  selectedItems: any = [];
+  dropdownSettings!: IDropdownSettings;
 
   createNode: FormGroup = new FormGroup({});
   searchvalue: any;
@@ -78,11 +68,11 @@ export class AddnodeComponent implements OnInit {
   ) {
     this.as.nodeList = this.as.nodesData;
     this.createNode = this.fb.group({
-      id: new Date(),
+      // id: new Date(),
       cityList: this.fb.control('', [Validators.required]),
       nodeNum: this.fb.control('', [Validators.required]),
       areaList: this.fb.control('', [Validators.required]),
-      chip: this.fb.control('', [Validators.required]),
+      used_in: this.fb.control('', [Validators.required]),
     });
     // update
     this.ar.queryParams.subscribe((data: any) => {
@@ -91,7 +81,43 @@ export class AddnodeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Vileparle East 400057' },
+      { item_id: 2, item_text: 'Santacruz East 400056' },
+      { item_id: 3, item_text: 'Santacruz East 400056' },
+      { item_id: 4, item_text: 'Vileparle East 400057' },
+      { item_id: 5, item_text: 'Santacruz East 400056' },
+      { item_id: 6, item_text: 'Santacruz East 400056' },
+    ];
+    this.usedInList = [
+      { item_id: 1, item_text: 'Brands in your neighbourhood' },
+      { item_id: 2, item_text: 'New store in your hood' },
+      { item_id: 3, item_text: 'New store in your kalyan' },
+    ];
+    // this.selectedItems = [
+    //   { item_id: 3, item_text: 'Pune' },
+    //   { item_id: 4, item_text: 'Navsari' },
+    // ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 2,
+      allowSearchFilter: true,
+    };
+    this.usedInSetting = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 2,
+      allowSearchFilter: true,
+    };
+  }
 
   onItemSelect(item: any) {
     console.log(item);
@@ -100,9 +126,16 @@ export class AddnodeComponent implements OnInit {
     console.log(items);
   }
 
+  onUsedIn(item: any) {
+    console.log(item);
+  }
+  onUsed(items: any) {
+    console.log(items);
+  }
+
   excute() {
-    let date = new Date();
-    this.createNode.value.id = date.toLocaleString();
+    // let date = new Date();
+    // this.createNode.value.id = date.toLocaleString();
     let value = { ...this.createNode.value };
     console.log('excute', value);
     this.as.nodeList.push(value);

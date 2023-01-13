@@ -35,7 +35,7 @@ const routes: Routes = [
         component: NodemanagementComponent,
         // children: [{ path: 'addnode', component: AddnodeComponent }],
       },
-      { path: 'addnode', component: AddnodeComponent },
+      { path: 'addnode/:id', component: AddnodeComponent },
       // { path: 'homescreen', component: HomescreenComponent },
     ],
   },

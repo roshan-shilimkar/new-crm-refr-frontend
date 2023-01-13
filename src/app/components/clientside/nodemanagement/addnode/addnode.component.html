@@ -26,43 +26,26 @@
             </mat-form-field>
         </div>
 
-        <div class="t20margin b15margin">
+        <div class="t20margin">
             <div class="m_size boldtext r15padding AScenter">Select area</div>
         </div>
         <div>
-            <!-- <mat-form-field class="crminput l5margin r5margin M50width" appearance="outline">
-                <mat-select placeholder="Filter Type" formControlName="areaList">
-                    <mat-option *ngFor="let item of area" [value]="item.titvalue">
-                        {{item.Title}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> -->
-
-            <mat-form-field class="crminput l5margin r5margin M50width" appearance="outline">
-                <input class="input_search" type="text" matInput>
-                <ul>
-                    <li>Vileparle East 400057</li>
-                    <li>Santacruz East 400056</li>
-                </ul>
-
-            </mat-form-field>
-
-
-
-
-
-
+            <ng-multiselect-dropdown formControlName="areaList" class="crminput l5margin r5margin M50width"
+                [placeholder]="'Select area'" [settings]="dropdownSettings" [data]="dropdownList"
+                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
         </div>
 
-        <div class="t20margin b15margin">
+        <div class="t20margin">
             <div class="m_size boldtext r15padding AScenter">Used in</div>
         </div>
-        <!-- <div>
-            <ng-multiselect-dropdown class="crminput l5margin r5margin M50width" [placeholder]="'Select area'"
-                [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems"
-                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+
+        <div>
+            <ng-multiselect-dropdown formControlName="used_in" class="crminput l5margin r5margin M50width"
+                [placeholder]="'Select area'" [settings]="usedInSetting" [data]="usedInList"
+                [(ngModel)]="usedInListItems" (onSelect)="onUsedIn($event)" (onUsed)="onUsed($event)">
             </ng-multiselect-dropdown>
-        </div> -->
+        </div>
 
 
         <div class="t30margin b15margin">
