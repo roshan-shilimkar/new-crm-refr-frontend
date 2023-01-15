@@ -50,6 +50,11 @@ import { AddnodeComponent } from './components/clientside/nodemanagement/addnode
 
 // npm select
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { HomescreenComponent } from './components/clientside/homescreen/homescreen.component';
+import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfeedmodule/topfeedmodule.component';
+import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
+import { ProgressComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/progress/progress.component';
+import { DndDirective } from './components/clientside/homescreen/topfeedmodule/feedsection/dnd.directive';
 
 @NgModule({
   declarations: [
@@ -69,6 +74,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NotificationComponent,
     NodemanagementComponent,
     AddnodeComponent,
+    HomescreenComponent,
+    TopfeedmoduleComponent,
+    FeedsectionComponent,
+    ProgressComponent,
+    DndDirective,
   ],
   imports: [
     MatDialogModule,

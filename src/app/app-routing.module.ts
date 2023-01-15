@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomescreenComponent } from './components/clientside/homescreen/homescreen.component';
+import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
+import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfeedmodule/topfeedmodule.component';
 import { AddnodeComponent } from './components/clientside/nodemanagement/addnode/addnode.component';
 import { NodemanagementComponent } from './components/clientside/nodemanagement/nodemanagement.component';
 import { DashboardComponent } from './components/tabs/dashboard/dashboard.component';
@@ -36,7 +39,9 @@ const routes: Routes = [
         // children: [{ path: 'addnode', component: AddnodeComponent }],
       },
       { path: 'addnode/:id', component: AddnodeComponent },
-      // { path: 'homescreen', component: HomescreenComponent },
+      { path: 'homescreen', component: HomescreenComponent },
+      { path: 'feedmodule', component: TopfeedmoduleComponent },
+      { path: 'feedsection', component: FeedsectionComponent },
     ],
   },
 ];

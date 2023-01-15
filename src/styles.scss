@@ -323,6 +323,10 @@ body {
   padding-right: 30px !important;
 }
 
+.A20margin {
+  margin: 20px !important;
+}
+
 .t0margin {
   margin-top: 0px !important;
 }
@@ -387,6 +391,14 @@ body {
   margin-right: 10px !important;
 }
 
+.r15margin {
+  margin-right: 15px !important;
+}
+
+.r20margin {
+  margin-right: 20px !important;
+}
+
 .t15margin {
   margin-top: 15px !important;
 }
@@ -430,6 +442,18 @@ body {
   margin-bottom: 60px !important;
 }
 
+.w80 {
+  width: 80% !important;
+}
+
+.w90 {
+  width: 90% !important;
+}
+
+.w25 {
+  width: 25% !important;
+}
+
 .M10width {
   max-width: 10%;
   min-width: 10%;
@@ -448,6 +472,11 @@ body {
 .M30width {
   max-width: 30%;
   min-width: 30%;
+}
+
+.M33width {
+  max-width: 33%;
+  min-width: 33%;
 }
 
 .M40width {
@@ -482,8 +511,8 @@ body {
 }
 
 .M90width {
-  max-width: 90%;
-  min-width: 90%;
+  max-width: 90% !important;
+  min-width: 90% !important;
 }
 
 .M100width {
@@ -577,6 +606,10 @@ body {
 
 .JCspace {
   justify-content: space-between !important;
+}
+
+.JCevenly {
+  justify-content: space-evenly !important;
 }
 
 .A5radius {
@@ -748,4 +781,8 @@ body {
   .selected-item {
     padding: 2px 10px !important;
   }
+}
+
+.w25 {
+  width: 25%;
 }
