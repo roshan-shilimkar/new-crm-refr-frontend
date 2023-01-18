@@ -55,6 +55,14 @@ import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfe
 import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
 import { ProgressComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/progress/progress.component';
 import { DndDirective } from './components/clientside/homescreen/topfeedmodule/feedsection/dnd.directive';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
+import { VisitsharedetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitsharedetails/visitsharedetails.component';
+import { VisitallstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitallstoredetails/visitallstoredetails.component';
+import { VisitaddstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitaddstoredetails/visitaddstoredetails.component';
+import { VisiteditstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visiteditstoredetails/visiteditstoredetails.component';
+import { BrandsneighbourhoodComponent } from './components/clientside/homescreen/brandsneighbourhood/brandsneighbourhood.component';
+import { HomegrowbrandsComponent } from './components/clientside/homescreen/homegrowbrands/homegrowbrands.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +87,13 @@ import { DndDirective } from './components/clientside/homescreen/topfeedmodule/f
     FeedsectionComponent,
     ProgressComponent,
     DndDirective,
+    VisitsharemoduleComponent,
+    VisitsharedetailsComponent,
+    VisitallstoredetailsComponent,
+    VisitaddstoredetailsComponent,
+    VisiteditstoredetailsComponent,
+    BrandsneighbourhoodComponent,
+    HomegrowbrandsComponent,
   ],
   imports: [
     MatDialogModule,
@@ -92,6 +107,7 @@ import { DndDirective } from './components/clientside/homescreen/topfeedmodule/f
     ReactiveFormsModule,
     MatRadioModule,
     MatExpansionModule,
+    NgxDropzoneModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     // 3. Initialize

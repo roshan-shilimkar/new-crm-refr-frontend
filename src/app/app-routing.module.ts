@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrandsneighbourhoodComponent } from './components/clientside/homescreen/brandsneighbourhood/brandsneighbourhood.component';
+import { HomegrowbrandsComponent } from './components/clientside/homescreen/homegrowbrands/homegrowbrands.component';
 import { HomescreenComponent } from './components/clientside/homescreen/homescreen.component';
 import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
 import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfeedmodule/topfeedmodule.component';
+import { VisitaddstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitaddstoredetails/visitaddstoredetails.component';
+import { VisitallstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitallstoredetails/visitallstoredetails.component';
+import { VisiteditstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visiteditstoredetails/visiteditstoredetails.component';
+import { VisitsharedetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitsharedetails/visitsharedetails.component';
+import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
 import { AddnodeComponent } from './components/clientside/nodemanagement/addnode/addnode.component';
 import { NodemanagementComponent } from './components/clientside/nodemanagement/nodemanagement.component';
 import { DashboardComponent } from './components/tabs/dashboard/dashboard.component';
@@ -40,8 +47,19 @@ const routes: Routes = [
       },
       { path: 'addnode/:id', component: AddnodeComponent },
       { path: 'homescreen', component: HomescreenComponent },
+      //
       { path: 'feedmodule', component: TopfeedmoduleComponent },
       { path: 'feedsection', component: FeedsectionComponent },
+      //
+      { path: 'visitmodule', component: VisitsharemoduleComponent },
+      { path: 'visitdetails', component: VisitsharedetailsComponent },
+      { path: 'allstores/:id', component: VisitallstoredetailsComponent },
+      { path: 'addstore/:id', component: VisitaddstoredetailsComponent },
+      { path: 'visit_editstore', component: VisiteditstoredetailsComponent },
+      //
+      { path: 'brands', component: BrandsneighbourhoodComponent },
+      //
+      { path: 'homebrands', component: HomegrowbrandsComponent },
     ],
   },
 ];

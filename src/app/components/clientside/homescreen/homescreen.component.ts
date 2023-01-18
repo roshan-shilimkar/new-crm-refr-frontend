@@ -29,14 +29,14 @@ export class HomescreenComponent implements OnInit {
 
   feedSection: Array<any> = [
     { feed: 'Top Feed', link: '/feedmodule' },
-    { feed: 'Visit, recommend and earn', link: '/feedmodules' },
-    { feed: 'Scan QR', link: '/feedmodule' },
-    { feed: 'Brands in your neighbourhood', link: '/feedmodule' },
-    { feed: 'Homegrown brands on Refr', link: '/feedmodule' },
-    { feed: 'Brand spotlight', link: '/feedmodule' },
-    { feed: 'What’s new in your hood', link: '/feedmodule' },
-    { feed: 'Top drops', link: '/feedmodule' },
-    { feed: 'Student special', link: '/feedmodule' },
+    { feed: 'Visit, recommend and earn', link: '/visitmodule' },
+    { feed: 'Scan QR', link: '/' },
+    { feed: 'Brands in your neighbourhood', link: '/brands' },
+    { feed: 'Homegrown brands on Refr', link: '/homebrands' },
+    { feed: 'Brand spotlight', link: '/' },
+    { feed: 'What’s new in your hood', link: '/' },
+    { feed: 'Top drops', link: '/' },
+    { feed: 'Student special', link: '/' },
   ];
 
   drop(event: CdkDragDrop<string[]>) {

@@ -137,6 +137,14 @@ body {
   border: 1px solid #c3b4b4 !important;
 }
 
+.border_none {
+  border: none !important;
+}
+
+.outline_none {
+  outline: none !important;
+}
+
 .nopadding {
   padding: 0px !important;
 }
@@ -255,6 +263,11 @@ body {
   padding-right: 10px !important;
 }
 
+.lr55padding {
+  padding-left: 55px !important;
+  padding-right: 55px !important;
+}
+
 .t15padding {
   padding-top: 15px !important;
 }
@@ -333,6 +346,11 @@ body {
 
 .b0margin {
   margin-bottom: 0px !important;
+}
+
+.lrautomargin {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .l0margin {
@@ -572,6 +590,10 @@ body {
   display: flex;
 }
 
+.dblock {
+  display: block !important;
+}
+
 .redTran {
   background-color: #fff4f4;
   color: #ff5353;
@@ -604,12 +626,20 @@ body {
   justify-content: center !important;
 }
 
+.JEend {
+  justify-content: end;
+}
+
 .JCspace {
   justify-content: space-between !important;
 }
 
 .JCevenly {
   justify-content: space-evenly !important;
+}
+
+.flex_col {
+  flex-direction: column;
 }
 
 .A5radius {
@@ -785,4 +815,25 @@ body {
 
 .w25 {
   width: 25%;
+}
+
+// purple border
+
+.Apurpleborder {
+  border: 1px solid #874bf9;
+}
+
+.pos_relative {
+  position: relative;
+}
+
+.pos_absolute {
+  position: absolute;
+}
+
+.mat_date {
+  .mat-form-field-infix {
+    display: flex;
+    padding: 0;
+  }
 }
