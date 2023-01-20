@@ -1,6 +1,6 @@
 <div class="A20padding">
     <div class="dflex AIcenter">
-        <a routerLink="/allstores">
+        <a>
             <svg width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24 12H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M12 19L5 12L12 5" stroke="black" stroke-width="2" stroke-linecap="round"
@@ -12,7 +12,7 @@
     </div>
 
     <div class="t50margin lr55padding">
-        <main class="b20margin">
+        <main class="b20margin" *ngIf="router.url == '/addstore/addstoredetails'">
             <div class="boldtext l_size b10margin">Store name</div>
 
             <div>
@@ -83,7 +83,7 @@
             </div>
         </main>
 
-        <main class="b20margin" *ngIf="router.url == '/addstore/'+ 1">
+        <main class="b20margin" *ngIf="router.url == '/addstore/addstoredetails'">
             <div class="boldtext l_size b10margin">Recommendation count</div>
 
             <div>
@@ -93,7 +93,7 @@
             </div>
         </main>
 
-        <main class="b20margin">
+        <main class="b20margin" *ngIf="router.url == '/storedetails/brandsallstore'">
             <div class="boldtext l_size b10margin">Offers</div>
 
             <div>
@@ -103,7 +103,7 @@
             </div>
         </main>
 
-        <main class="b20margin">
+        <main class="b20margin" *ngIf="router.url == '/storedetails/brandsallstore'">
             <div class="boldtext l_size b10margin">Amount</div>
 
             <div>
@@ -115,7 +115,7 @@
 
 
 
-        <main class="b20margin" *ngIf="router.url == '/addstore/'+ 1">
+        <main class="b20margin" *ngIf="router.url == '/addstore/addstoredetails'">
             <div class="boldtext l_size b10margin">Store URL</div>
 
             <div>

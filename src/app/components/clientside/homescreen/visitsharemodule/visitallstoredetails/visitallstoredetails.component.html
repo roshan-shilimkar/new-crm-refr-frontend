@@ -8,9 +8,12 @@
             </svg>
 
         </a>
-        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/allstores/' + 1">All store
+        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/storedetails/visitstoresection'">All
+            store
             details</span>
-        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/allstores/' + 2">Brands in your
+        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/storedetails/brandsallstore'">Brands
+            in
+            your
             neighbourhood</span>
     </div>
 
@@ -80,7 +83,7 @@
             </section>
             <section>
                 <main>
-                    <div [routerLink]="'/addstore/' + 1"
+                    <div (click)="addstorelink('addstoredetails')"
                         class="w200 h200 Aborder dflex flex_col JCcenter AIcenter pos_relative cursor_pointer">
                         <mat-icon>
                             add

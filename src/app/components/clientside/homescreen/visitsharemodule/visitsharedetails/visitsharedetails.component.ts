@@ -17,7 +17,6 @@ export class VisitsharedetailsComponent implements OnInit {
   // searchvalue: any;
   // valuetype: number = 2;
   // Valuearr: Array<any> = [];
-  userID: string = '';
 
   nodes!: MatTableDataSource<any>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -57,7 +56,7 @@ export class VisitsharedetailsComponent implements OnInit {
 
   constructor(
     public as: ApiserviceService,
-    public rs: Router,
+    public router: Router,
     private actRoute: ActivatedRoute
   ) {}
 
@@ -65,6 +64,17 @@ export class VisitsharedetailsComponent implements OnInit {
     setTimeout(() => {
       this.execute();
     }, 1000);
+  }
+
+  allstores(store: any) {
+    // visit share earn
+    if (this.router.url == '/visitdetails') {
+      this.router.navigate(['/storedetails/' + store]);
+    }
+    // Brands in your neighbourhood
+    if (this.router.url == '/allstores/brandsallstore') {
+      this.router.navigate(['/storedetails/' + store]);
+    }
   }
 
   execute() {

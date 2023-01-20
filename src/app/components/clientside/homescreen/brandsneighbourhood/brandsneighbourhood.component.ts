@@ -35,7 +35,7 @@ export class BrandsneighbourhoodComponent implements OnInit {
 
   constructor(
     public as: ApiserviceService,
-    public rs: Router,
+    public router: Router,
     public dialog: MatDialog
   ) {}
 
@@ -43,6 +43,12 @@ export class BrandsneighbourhoodComponent implements OnInit {
     setTimeout(() => {
       this.execute();
     }, 1000);
+  }
+
+  allstores(store: any) {
+    if (this.router.url == '/brands') {
+      this.router.navigate(['/storedetails/' + store]);
+    }
   }
 
   ParaArr: Array<any> = [

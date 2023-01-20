@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-addnode',
@@ -60,11 +61,16 @@ export class AddnodeComponent implements OnInit {
     },
   ];
 
+  // firebase
+  newItemName?: string;
+  items: any;
+
   constructor(
     public as: ApiserviceService,
     public rs: Router,
     public fb: FormBuilder,
-    public ar: ActivatedRoute
+    public ar: ActivatedRoute,
+    private afs: AngularFirestore
   ) {
     this.as.nodeList = this.as.nodesData;
     this.createNode = this.fb.group({
@@ -74,11 +80,9 @@ export class AddnodeComponent implements OnInit {
       areaList: this.fb.control('', [Validators.required]),
       used_in: this.fb.control('', [Validators.required]),
     });
-    // update
-    this.ar.queryParams.subscribe((data: any) => {
-      let value = this.as.nodeList.find((i: any) => i.id == data.id);
-      this.edit(value);
-    });
+
+    // firebase
+    this.items = this.afs.collection('items').valueChanges();
   }
 
   ngOnInit(): void {
@@ -136,25 +140,19 @@ export class AddnodeComponent implements OnInit {
   excute() {
     // let date = new Date();
     // this.createNode.value.id = date.toLocaleString();
-    let value = { ...this.createNode.value };
-    console.log('excute', value);
-    this.as.nodeList.push(value);
-    this.rs.navigateByUrl('nodemanage');
-    localStorage.setItem('nodesData', JSON.stringify(this.as.nodeList));
+    // let value = { ...this.createNode.value };
+    // console.log('excute', value);
+    // this.as.nodeList.push(value);
+    // this.rs.navigateByUrl('nodemanage');
+    // localStorage.setItem('nodesData', JSON.stringify(this.as.nodeList));
+
+    // firebase query
+    this.afs.collection('items').add({ name: this.newItemName });
+    this.newItemName = '';
+    console.log('abc', this.newItemName);
   }
 
-  edit(item: any) {
-    let value = { ...item };
-    this.createNode.patchValue(value);
-  }
+  edit() {}
 
-  update() {
-    let index = this.as.nodeList.findIndex((i: any) => {
-      i.id == this.createNode.value.id;
-    });
-    let value = { ...this.createNode.value };
-    this.as.nodeList[index] = value;
-    console.log('update', (this.as.nodeList[index] = value));
-    this.rs.navigateByUrl('nodemanage');
-  }
+  update() {}
 }

@@ -19,4 +19,17 @@ export class VisitallstoredetailsComponent implements OnInit {
   constructor(public router: Router) {}
 
   ngOnInit(): void {}
+
+  addstorelink(adds: any) {
+    // visit share earn
+    if (this.router.url == '/storedetails/visitstoresection') {
+      this.router.navigate(['/addstore/' + adds]);
+    }
+    // Brands in your neighbourhood
+
+    if (this.router.url == '/storedetails/brandsallstore') {
+      this.router.navigate(['/addstore/' + adds]);
+    }
+    console.log('click');
+  }
 }

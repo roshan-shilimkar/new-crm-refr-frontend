@@ -53,7 +53,7 @@ const routes: Routes = [
       //
       { path: 'visitmodule', component: VisitsharemoduleComponent },
       { path: 'visitdetails', component: VisitsharedetailsComponent },
-      { path: 'allstores/:id', component: VisitallstoredetailsComponent },
+      { path: 'storedetails/:id', component: VisitallstoredetailsComponent },
       { path: 'addstore/:id', component: VisitaddstoredetailsComponent },
       { path: 'visit_editstore', component: VisiteditstoredetailsComponent },
       //
