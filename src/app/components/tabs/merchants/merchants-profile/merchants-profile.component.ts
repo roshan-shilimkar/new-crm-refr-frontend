@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,8 +22,11 @@ import { TransactionDetailsComponent } from '../../transaction-details/transacti
 export class MerchantsProfileComponent implements OnInit {
   indexs: number = 0;
   catindex: number = 0;
+  subcatindex:number = 0;
   listLoc: any[] = [];
   @ViewChild('MatTabGroupss') mattab?: MatTabGroup;
+  @ViewChild('MatTaborders') mattaborders?: MatTabGroup;
+
 
   SubColumns: string[] = [
     'Sub_plan',
@@ -106,7 +110,7 @@ export class MerchantsProfileComponent implements OnInit {
   storeinfoDetails: any;
   productList: Array<any> = [];
   // catindex:number;
-  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService, private dialog: MatDialog, public auth: AuthService) {
+  constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService, private dialog: MatDialog, public auth: AuthService,private https: HttpClient) {
     this.execute();
   }
 
@@ -127,18 +131,25 @@ export class MerchantsProfileComponent implements OnInit {
         this.storeDetails = store;
         this.listLoc = store.loc;
         this.Selcategory = store.cat;
-        this.Selsubcategory = store.subCat;
-        console.log("category list");
-        console.log(store.cat);
-        console.log(this.auth.resource.categoryList);
-        this.catindex = this.auth.resource.categoryList.indexOf((x:any)=>{
-          x.id == store.cat;
-        })
-        console.log(this.catindex);
+        // console.log(store.subCat);
+        // console.log(store.cat);
+        // console.log(this.auth.resource.categoryList);
+        this.catindex = this.auth.resource.categoryList.findIndex(x=>
+          x.id == store.cat
+        );
+        this.subcatindex = this.auth.resource.categoryList[this.catindex].items.findIndex((x:any)=> 
+          x.id == store.subCat
+          );
+        this.Selsubcategory = this.auth.resource.categoryList[this.catindex].items[this.subcatindex].id;
+
+        // console.log(this.catindex);
+        // console.log(this.Selsubcategory);
+
         
         this.apiservice.getUserByUID(store.by).then(storeuser => {
           const storeuserD: any = storeuser.exists() ? storeuser.data() : null;
           this.storeuid = storeuserD.uid;
+          console.log(this.storeuid);
           this.storeinfoDetails = storeuserD;
         })
       })
@@ -180,8 +191,55 @@ export class MerchantsProfileComponent implements OnInit {
   }
 
 
+ordertypechange(){
+  console.log(this.mattaborders?.selectedIndex);
+  this.orderdataSource = new MatTableDataSource();
+  if (this.mattaborders?.selectedIndex == 0) {
+    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid,"journey","==","DIRECT").pipe(take(1)).subscribe((recentorders: any) => {
+      this.orderdataSource = new MatTableDataSource(recentorders);
+      this.orderdataSource.sort = this.sort;
+    });
+  }
+  else if (this.mattaborders?.selectedIndex == 1) {
+    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid,"journey","==","F2F").pipe(take(1)).subscribe((recentorders: any) => {
+      this.orderdataSource = new MatTableDataSource(recentorders);
+      this.orderdataSource.sort = this.sort;
+    });
+  }
+  else if (this.mattaborders?.selectedIndex == 2) {
+    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid,"journey","==","POS").pipe(take(1)).subscribe((recentorders: any) => {
+      this.orderdataSource = new MatTableDataSource(recentorders);
+      this.orderdataSource.sort = this.sort;
+    });
+  }
+  else if (this.mattaborders?.selectedIndex == 3) {
+    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid,"journey","==","BURN").pipe(take(1)).subscribe((recentorders: any) => {
+      this.orderdataSource = new MatTableDataSource(recentorders);
+      this.orderdataSource.sort = this.sort;
+    });
+  }
+}
+
   getproducts() {
     this.apiservice.getProductList(this.storeID).pipe(take(1)).subscribe((products: any) => {
+      // console.log(products);
+
+      // for (let i = 0; i < products.length; i++) {
+      //   // if(i < 1000){
+      //   const body = {
+      //     searchData: products[i],
+      //     searchIndex: "things"
+      //   }
+      //   console.log(body);
+      //   // const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
+      //   // const body = { title: 'Angular POST Request Example' };
+      //   this.https.post<any>('https://us-central1-refr-india.cloudfunctions.net/ind_serve/api/search/elastic/add/IN', body).subscribe(data => {
+      //       // this.postId = data.id;
+      //       console.log(i +"= success");
+      //   });
+      // }
+      // }
+
       this.ProductdataSource = new MatTableDataSource(products);
       this.ProductdataSource.sort = this.sort;
     })
@@ -195,7 +253,7 @@ export class MerchantsProfileComponent implements OnInit {
   }
 
   getorders() {
-    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(100, false, "to", "==", this.storeuid,"journey","==","DIRECT").pipe(take(1)).subscribe((recentorders: any) => {
       this.orderdataSource = new MatTableDataSource(recentorders);
       this.orderdataSource.sort = this.sort;
     });

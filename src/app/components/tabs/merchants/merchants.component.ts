@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -75,7 +76,7 @@ export class MerchantsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-    private apiservice: ApiserviceService, private excelservice: ExcelexportService
+    private apiservice: ApiserviceService, private excelservice: ExcelexportService,private https: HttpClient,
   ) { }
   ngOnInit(): void {
   }
@@ -144,6 +145,27 @@ export class MerchantsComponent implements OnInit {
 
   execute() {
     this.apiservice.getRecentStores(10000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentStore: any) => {
+      // console.log(recentStore);
+
+
+
+
+      // for (let i = 0; i < recentStore.length; i++) {
+      //   const body = {
+      //     searchData: recentStore[i],
+      //     searchIndex: "things"
+      //   }
+      //   console.log(body);
+      //   // const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
+      //   // const body = { title: 'Angular POST Request Example' };
+      //   // this.https.post<any>('https://us-central1-refr-india.cloudfunctions.net/ind_serve/api/search/elastic/add/IN', body).subscribe(data => {
+      //   //     // this.postId = data.id;
+      //   //     console.log(i +"= success");
+      //   // });
+      // }
+
+
+
       this.MerchantdataSource = new MatTableDataSource(recentStore);
       this.MerchantdataSource.sort = this.sort;
     });
@@ -167,5 +189,5 @@ export class MerchantsComponent implements OnInit {
     });
   }
 
-  next(){}
+  next() { }
 }
