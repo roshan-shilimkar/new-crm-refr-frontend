@@ -3,15 +3,15 @@
         <span class="xxl_size boldtext r15padding AScenter">Create node</span>
     </div>
 
-    <form [formGroup]="createNode" (ngSubmit)="excute()">
+    <form #nodeForm="ngForm" (ngSubmit)="execute(nodeForm.value)">
 
         <div class="t50margin b15margin">
             <div class="m_size boldtext r15padding AScenter">Select city</div>
         </div>
         <div>
             <mat-form-field class="crminput l5margin r5margin M50width" appearance="outline">
-                <mat-select placeholder="Filter Type" formControlName="cityList">
-                    <mat-option *ngFor="let item of ParaArr" [value]="item.titvalue">
+                <mat-select placeholder="Filter Type">
+                    <mat-option *ngFor="let item of ParaArr" [value]="item.titvalue" name="cities" ngModel required>
                         {{item.Title}}
                     </mat-option>
                 </mat-select>
@@ -22,7 +22,7 @@
         </div>
         <div>
             <mat-form-field class="crminput l5margin r5margin M50width" appearance="outline">
-                <input type="number" matInput formControlName="nodeNum">
+                <input type="number" matInput autocomplete="off" name="node" ngModel required>
             </mat-form-field>
         </div>
 
@@ -30,9 +30,9 @@
             <div class="m_size boldtext r15padding AScenter">Select area</div>
         </div>
         <div>
-            <ng-multiselect-dropdown formControlName="areaList" class="crminput l5margin r5margin M50width"
-                [placeholder]="'Select area'" [settings]="dropdownSettings" [data]="dropdownList"
-                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            <ng-multiselect-dropdown class="crminput l5margin r5margin M50width" [placeholder]="'Select area'"
+                [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems"
+                (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" name="area" ngModel required>
             </ng-multiselect-dropdown>
         </div>
 
@@ -41,17 +41,17 @@
         </div>
 
         <div>
-            <ng-multiselect-dropdown formControlName="used_in" class="crminput l5margin r5margin M50width"
-                [placeholder]="'Select area'" [settings]="usedInSetting" [data]="usedInList"
-                [(ngModel)]="usedInListItems" (onSelect)="onUsedIn($event)" (onUsed)="onUsed($event)">
+            <ng-multiselect-dropdown class="crminput l5margin r5margin M50width" [placeholder]="'Select area'"
+                [settings]="usedInSetting" [data]="usedInList" [(ngModel)]="usedInListItems"
+                (onSelect)="onUsedIn($event)" (onUsed)="onUsed($event)" name="used_in" ngModel required>
             </ng-multiselect-dropdown>
         </div>
 
 
         <div class="t30margin b15margin">
-            <button mat-button [disabled]="!createNode.valid"
+            <button mat-button
                 class="crud_ctas s_size semiboldtext purple_background normallineheight White_txt">Create</button>
-            <button type="button" mat-button (click)="update()"
+            <button type="button" mat-button
                 class="crud_ctas s_size semiboldtext purple_background normallineheight White_txt">Update</button>
         </div>
 

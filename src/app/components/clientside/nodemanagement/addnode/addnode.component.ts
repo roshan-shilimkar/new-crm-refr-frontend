@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import {
@@ -10,7 +10,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from 'src/app/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-addnode',
@@ -26,7 +27,6 @@ export class AddnodeComponent implements OnInit {
   selectedItems: any = [];
   dropdownSettings!: IDropdownSettings;
 
-  createNode: FormGroup = new FormGroup({});
   searchvalue: any;
   valuetype: number = 2;
   Valuearr: Array<any> = [];
@@ -62,27 +62,16 @@ export class AddnodeComponent implements OnInit {
   ];
 
   // firebase
-  newItemName?: string;
-  items: any;
+  @ViewChild('nodeForm') nodeForm?: NgForm;
 
   constructor(
     public as: ApiserviceService,
     public rs: Router,
     public fb: FormBuilder,
     public ar: ActivatedRoute,
-    private afs: AngularFirestore
+    public auth: AuthService
   ) {
-    this.as.nodeList = this.as.nodesData;
-    this.createNode = this.fb.group({
-      // id: new Date(),
-      cityList: this.fb.control('', [Validators.required]),
-      nodeNum: this.fb.control('', [Validators.required]),
-      areaList: this.fb.control('', [Validators.required]),
-      used_in: this.fb.control('', [Validators.required]),
-    });
-
     // firebase
-    this.items = this.afs.collection('items').valueChanges();
   }
 
   ngOnInit(): void {
@@ -137,22 +126,12 @@ export class AddnodeComponent implements OnInit {
     console.log(items);
   }
 
-  excute() {
-    // let date = new Date();
-    // this.createNode.value.id = date.toLocaleString();
-    // let value = { ...this.createNode.value };
-    // console.log('excute', value);
-    // this.as.nodeList.push(value);
-    // this.rs.navigateByUrl('nodemanage');
-    // localStorage.setItem('nodesData', JSON.stringify(this.as.nodeList));
-
-    // firebase query
-    this.afs.collection('items').add({ name: this.newItemName });
-    this.newItemName = '';
-    console.log('abc', this.newItemName);
+  execute(nodeData: {
+    city: string;
+    node: string;
+    area: string;
+    used_in: string;
+  }) {
+    console.log(nodeData, 'exe');
   }
-
-  edit() {}
-
-  update() {}
 }
