@@ -21,13 +21,25 @@ export class TabsComponent implements OnInit {
     { tit: 'Redeem Request', link: '/Redeemreq' },
     { tit: 'Transactions', link: '/transaction' },
     { tit: 'Notification', link: '/Notification' },
-    { tit: 'Web Site Enquiry', link: '/websiteform' }
+    { tit: 'Web Site Enquiry', link: '/websiteform' },
+    {
+      tit: 'Client side',
+      iconName: 'expand_more',
+      isexpanded: false,
+      childern: [
+        { tit: 'Node management', link: '/nodemanage' },
+        { tit: 'Homescreen', link: '/homescreen' },
+      ],
+    },
   ];
 
-  constructor(
-    public router: Router,
+  constructor(public router: Router) {}
 
-  ) { } 
+  ngOnInit(): void {}
 
-  ngOnInit(): void { }
+  expand(index: any) {
+    if (index == 10) {
+      this.navRoutes[index].isexpanded = !this.navRoutes[index].isexpanded;
+    }
+  }
 }

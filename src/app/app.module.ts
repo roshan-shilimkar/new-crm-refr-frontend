@@ -18,22 +18,55 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { provideFirebaseApp, getApp, initializeApp, FirebaseApp } from '@angular/fire/app';
+import {
+  provideFirebaseApp,
+  getApp,
+  initializeApp,
+  FirebaseApp,
+} from '@angular/fire/app';
 import { provideAuth, initializeAuth } from '@angular/fire/auth';
-import { provideFirestore, getFirestore, enableIndexedDbPersistence, connectFirestoreEmulator } from '@angular/fire/firestore';
+import {
+  provideFirestore,
+  getFirestore,
+  enableIndexedDbPersistence,
+  connectFirestoreEmulator,
+} from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getMessaging, provideMessaging } from '@angular/fire/messaging';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { indexedDBLocalPersistence, browserPopupRedirectResolver } from 'firebase/auth';
+import {
+  indexedDBLocalPersistence,
+  browserPopupRedirectResolver,
+} from 'firebase/auth';
 import { MatRadioModule } from '@angular/material/radio';
 import { NotificationComponent } from './components/tabs/notification/notification.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { WebsiteformComponent } from './components/tabs/websiteform/websiteform.component';
 import { QrViewerComponent } from './components/tabs/merchants/merchants-profile/qr-viewer/qr-viewer.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { NodemanagementComponent } from './components/clientside/nodemanagement/nodemanagement.component';
+import { AddnodeComponent } from './components/clientside/nodemanagement/addnode/addnode.component';
+
+// npm select
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { HomescreenComponent } from './components/clientside/homescreen/homescreen.component';
+import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfeedmodule/topfeedmodule.component';
+import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
+import { ProgressComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/progress/progress.component';
+import { DndDirective } from './components/clientside/homescreen/topfeedmodule/feedsection/dnd.directive';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
+import { VisitsharedetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitsharedetails/visitsharedetails.component';
+import { VisitallstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitallstoredetails/visitallstoredetails.component';
+import { VisitaddstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitaddstoredetails/visitaddstoredetails.component';
+import { VisiteditstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visiteditstoredetails/visiteditstoredetails.component';
+import { BrandsneighbourhoodComponent } from './components/clientside/homescreen/brandsneighbourhood/brandsneighbourhood.component';
+import { HomegrowbrandsComponent } from './components/clientside/homescreen/homegrowbrands/homegrowbrands.component';
 
 @NgModule({
-  declarations: [AppComponent,
+  declarations: [
+    AppComponent,
     TabsComponent,
     OrdersComponent,
     DashboardComponent,
@@ -46,7 +79,22 @@ import { QrViewerComponent } from './components/tabs/merchants/merchants-profile
     WebsiteformComponent,
     TransactionDetailsComponent,
     QrViewerComponent,
-    NotificationComponent],
+    NotificationComponent,
+    NodemanagementComponent,
+    AddnodeComponent,
+    HomescreenComponent,
+    TopfeedmoduleComponent,
+    FeedsectionComponent,
+    ProgressComponent,
+    DndDirective,
+    VisitsharemoduleComponent,
+    VisitsharedetailsComponent,
+    VisitallstoredetailsComponent,
+    VisitaddstoredetailsComponent,
+    VisiteditstoredetailsComponent,
+    BrandsneighbourhoodComponent,
+    HomegrowbrandsComponent,
+  ],
   imports: [
     MatDialogModule,
     HttpClientModule,
@@ -58,6 +106,8 @@ import { QrViewerComponent } from './components/tabs/merchants/merchants-profile
     FormsModule,
     ReactiveFormsModule,
     MatRadioModule,
+    MatExpansionModule,
+    NgxDropzoneModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 
     // 3. Initialize
@@ -69,14 +119,17 @@ import { QrViewerComponent } from './components/tabs/merchants/merchants-profile
       enableIndexedDbPersistence(firestore);
       return firestore;
     }),
-    provideAuth(() => initializeAuth(getApp(), {
-      persistence: indexedDBLocalPersistence,
-      popupRedirectResolver: browserPopupRedirectResolver,
-    })),
+    provideAuth(() =>
+      initializeAuth(getApp(), {
+        persistence: indexedDBLocalPersistence,
+        popupRedirectResolver: browserPopupRedirectResolver,
+      })
+    ),
     provideStorage(() => getStorage()),
     provideMessaging(() => getMessaging()),
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
