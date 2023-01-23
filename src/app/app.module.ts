@@ -66,6 +66,7 @@ import { HomegrowbrandsComponent } from './components/clientside/homescreen/home
 import { HomegrownbrandsComponent } from './components/internalsection/homegrownbrands/homegrownbrands.component';
 import { InternalsectionComponent } from './components/internalsection/internalsection.component';
 import { CategorysectioninternalComponent } from './components/internalsection/homegrownbrands/categorysectioninternal/categorysectioninternal.component';
+import { VisitshareinternalComponent } from './components/internalsection/visitshareinternal/visitshareinternal.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { CategorysectioninternalComponent } from './components/internalsection/h
     HomegrownbrandsComponent,
     InternalsectionComponent,
     CategorysectioninternalComponent,
+    VisitshareinternalComponent,
   ],
   imports: [
     MatDialogModule,

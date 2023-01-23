@@ -52,17 +52,15 @@ export class NodemanagementComponent implements OnInit {
   ];
 
   async execute() {
-    // const users = [
-    //   {
-    //     Merch_id: '1',
-    //   },
-    // ];
-
     this.as.getNodeData().subscribe((data: any) => {
       console.log('data', data);
       this.nodes = new MatTableDataSource(data);
       this.nodes.paginator = this.paginator;
       this.nodes.sort = this.sort;
     });
+  }
+
+  editNode(name: any) {
+    console.log(name, 'edit');
   }
 }

@@ -69,8 +69,7 @@
                             </svg>
                             <div class="s_size semiboldtext">Preview</div>
                         </a>
-                        <a class="text_decoration_none black_text cursor_pointer" [routerLink]="'/addnode/' + row.id"
-                            [queryParams]="{ id: row?.id }">
+                        <a class="text_decoration_none black_text cursor_pointer" (click)="editNode(row?.name)">
                             <svg class="M70width" width="28" height="28" viewBox="0 0 28 28" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -90,9 +89,9 @@
                 </tr>
             </table>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
                 aria-label="Select page of periodic elements">
-            </mat-paginator>
+            </mat-paginator> -->
         </div>
     </ng-container>
 

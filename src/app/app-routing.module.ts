@@ -15,6 +15,7 @@ import { NodemanagementComponent } from './components/clientside/nodemanagement/
 import { CategorysectioninternalComponent } from './components/internalsection/homegrownbrands/categorysectioninternal/categorysectioninternal.component';
 import { HomegrownbrandsComponent } from './components/internalsection/homegrownbrands/homegrownbrands.component';
 import { InternalsectionComponent } from './components/internalsection/internalsection.component';
+import { VisitshareinternalComponent } from './components/internalsection/visitshareinternal/visitshareinternal.component';
 import { DashboardComponent } from './components/tabs/dashboard/dashboard.component';
 import { MerchantsProfileComponent } from './components/tabs/merchants/merchants-profile/merchants-profile.component';
 import { MerchantsComponent } from './components/tabs/merchants/merchants.component';
@@ -68,6 +69,7 @@ const routes: Routes = [
       { path: 'internalsec', component: InternalsectionComponent },
       { path: 'homegrownintsec', component: HomegrownbrandsComponent },
       { path: 'categorysec', component: CategorysectioninternalComponent },
+      { path: 'visitshareinternal', component: VisitshareinternalComponent },
     ],
   },
 ];
