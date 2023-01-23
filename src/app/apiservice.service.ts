@@ -136,7 +136,7 @@ export class ApiserviceService {
       `${'hypes'}`
     );
     const qu = query(catData, where('sid', '==', sid), orderBy('sin', 'desc'));
-    const qu = query(catData, where('sid', '==', sid), orderBy('sin', 'desc'));
+    // const qu = query(catData, where('sid', '==', sid), orderBy('sin', 'desc'));
     return collectionData(qu);
   }
 
@@ -144,8 +144,11 @@ export class ApiserviceService {
     c: number,
     getall: boolean,
     Para?: any,
+    Para1?: any,
     operator?: any,
-    value?: any
+    operator1?: any,
+    value?: any,
+    value1?: any
   ) {
     const catData: CollectionReference = collection(
       this.firestore,
