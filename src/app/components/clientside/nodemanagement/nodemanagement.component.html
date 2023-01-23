@@ -30,15 +30,15 @@
                 <ng-container matColumnDef="node">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder lborder">Node
                     </th>
-                    <td class="rborder lborder" mat-cell *matCellDef="let row">{{row.name}}</td>
+                    <td class="rborder lborder" mat-cell *matCellDef="let row">{{row?.name}}</td>
                 </ng-container>
 
-                <!-- <ng-container matColumnDef="area">
+                <ng-container matColumnDef="area">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder tborder">Area
                     </th>
                     <td class="rborder tborder" mat-cell *matCellDef="let row">
                         <div class="d_inline lightgray_bg tb5padding lr15padding A20radius">
-                            {{row.areaList[0].item_text}}
+                            {{row?.areas[0].item_text}}
                         </div>
                     </td>
                 </ng-container>
@@ -46,8 +46,10 @@
                 <ng-container matColumnDef="used_in">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder tborder">Used in
                     </th>
-                    <td class="rborder tborder" mat-cell *matCellDef="let row"> {{row.used_in[0].item_text}} </td>
-                </ng-container> -->
+                    <td class="rborder tborder" mat-cell *matCellDef="let row">
+                        {{row?.used_in[0].item_text}}
+                    </td>
+                </ng-container>
 
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder lborder tborder">
@@ -68,7 +70,7 @@
                             <div class="s_size semiboldtext">Preview</div>
                         </a>
                         <a class="text_decoration_none black_text cursor_pointer" [routerLink]="'/addnode/' + row.id"
-                            [queryParams]="{ id: row.id }">
+                            [queryParams]="{ id: row?.id }">
                             <svg class="M70width" width="28" height="28" viewBox="0 0 28 28" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -87,10 +89,10 @@
                 <tr class="mat-row" *matNoDataRow>
                 </tr>
             </table>
-
+            <!-- 
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
                 aria-label="Select page of periodic elements">
-            </mat-paginator>
+            </mat-paginator> -->
         </div>
     </ng-container>
 

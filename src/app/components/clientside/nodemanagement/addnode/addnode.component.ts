@@ -159,21 +159,5 @@ export class AddnodeComponent implements OnInit {
       updated_at: new Date(),
     });
     console.log('Document written with ID: ', docRef.id);
-
-    //
-
-    // const get = doc(this.firestore, 'node_manager', 'z0Tkmf4weXGQNWsvccZD');
-    // const docSnap = await getDoc(get);
-
-    // if (docSnap.exists()) {
-    //   console.log('Document data:', docSnap.data());
-    //   // let x = docSnap.data();
-    //   // this.rs.navigate(['/nodemanage'], {
-    //   //   queryParams: { x: JSON.stringify(x) },
-    //   // });
-    // } else {
-    //   // doc.data() will be undefined in this case
-    //   console.log('No such document!');
-    // }
   }
 }

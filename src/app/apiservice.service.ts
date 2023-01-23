@@ -442,4 +442,28 @@ export class ApiserviceService {
 
   nodeList: any[] = [];
   nodesData: any[] = JSON.parse(localStorage.getItem('nodesData') || '[]');
+
+  getNodeData() {
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'node_manager'}`
+    );
+
+    const qu = query(manageNode);
+
+    return collectionData(qu);
+  }
+
+  updateNodeData(uid: string, nodeData: any) {
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'node_manager'}`
+    );
+
+    const qu = doc(this.firestore, 'node_manager', `${uid}`);
+
+    return updateDoc(qu, {
+      name: nodeData.name,
+    });
+  }
 }

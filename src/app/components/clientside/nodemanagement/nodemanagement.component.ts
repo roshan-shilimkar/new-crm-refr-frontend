@@ -19,7 +19,8 @@ import {
   addDoc,
 } from 'firebase/firestore';
 
-import { Firestore } from '@angular/fire/firestore';
+import { collectionData, Firestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-nodemanagement',
@@ -36,13 +37,14 @@ export class NodemanagementComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  nodeColumns: string[] = ['node', 'action'];
+  nodeColumns: string[] = ['node', 'area', 'used_in', 'action'];
 
   constructor(
     public as: ApiserviceService,
     public rs: Router,
     public ar: ActivatedRoute,
-    private firestore: Firestore
+    public firestore: Firestore,
+    public afs: AngularFirestore
   ) {
     // this.as.nodeList = this.as.nodesData;
   }
@@ -79,32 +81,11 @@ export class NodemanagementComponent implements OnInit {
     //   },
     // ];
 
-    const manageNode: CollectionReference = collection(
-      this.firestore,
-      `${'node_manager'}`
-    );
-
-    const querySnapshot = await getDocs(
-      collection(this.firestore, 'node_manager')
-    );
-    querySnapshot.forEach((doc: any) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, '=>', doc.data());
-
-      this.nodes = new MatTableDataSource(doc.id);
-      // console.log(this.nodes, 'nodesasdas');
-
+    this.as.getNodeData().subscribe((data: any) => {
+      console.log('data', data);
+      this.nodes = new MatTableDataSource(data);
       this.nodes.paginator = this.paginator;
       this.nodes.sort = this.sort;
     });
-
-    // this.ar.queryParams.subscribe((d: any) => {
-    //   console.log(d, 'pp');
-    //   this.nodes = new MatTableDataSource(d);
-    //   // console.log(this.nodes, 'nodesasdas');
-
-    //   this.nodes.paginator = this.paginator;
-    //   this.nodes.sort = this.sort;
-    // });
   }
 }
