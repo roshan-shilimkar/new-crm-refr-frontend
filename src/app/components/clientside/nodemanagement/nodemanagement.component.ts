@@ -51,20 +51,18 @@ export class NodemanagementComponent implements OnInit {
     },
   ];
 
-  execute() {
+  async execute() {
     // const users = [
     //   {
     //     Merch_id: '1',
     //   },
     // ];
-    this.nodes = new MatTableDataSource(this.as.nodeList);
-    this.nodes.paginator = this.paginator;
-    this.nodes.sort = this.sort;
-    // this.auth.getStoreList(100).subscribe((users: any) => {
-    //   console.log('List: ', users);
-    //   this.dataSource = new MatTableDataSource(users);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    // });
+
+    this.as.getNodeData().subscribe((data: any) => {
+      console.log('data', data);
+      this.nodes = new MatTableDataSource(data);
+      this.nodes.paginator = this.paginator;
+      this.nodes.sort = this.sort;
+    });
   }
 }

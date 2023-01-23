@@ -50,12 +50,10 @@ export class ApiserviceService {
     return serverTimestamp;
   }
 
-  getuserdata(id:any){
-    console.log(typeof(id));
-    const catData: CollectionReference = collection(this.firestore, "users");
-    const qu = query(catData,
-      where("uid", "==", id),
-    );
+  getuserdata(id: any) {
+    console.log(typeof id);
+    const catData: CollectionReference = collection(this.firestore, 'users');
+    const qu = query(catData, where('uid', '==', id));
     return collectionData(qu);
   }
 
@@ -124,77 +122,100 @@ export class ApiserviceService {
     const qu = query(
       catData,
       //where("ban", "==", false),
-      where("sid", "==", sid),
-      orderBy("sin", "asc"),
+      where('sid', '==', sid),
+      orderBy('sin', 'asc')
       //limit(c)
     );
     return collectionData(qu);
   }
 
   getCampaignList(sid: string) {
-    console.log("side = "+sid);
-    const catData: CollectionReference = collection(this.firestore, `${'hypes'}`)
-    const qu = query(catData,
-      where("sid", "==", sid),
-      orderBy("sin", "desc"),
+    console.log('side = ' + sid);
+    const catData: CollectionReference = collection(
+      this.firestore,
+      `${'hypes'}`
     );
+    const qu = query(catData, where('sid', '==', sid), orderBy('sin', 'desc'));
     const qu = query(catData, where('sid', '==', sid), orderBy('sin', 'desc'));
     return collectionData(qu);
   }
 
-
-  getRecentAddedOrder(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
-    const catData: CollectionReference = collection(this.firestore, `${'walt'}`);
+  getRecentAddedOrder(
+    c: number,
+    getall: boolean,
+    Para?: any,
+    operator?: any,
+    value?: any
+  ) {
+    const catData: CollectionReference = collection(
+      this.firestore,
+      `${'walt'}`
+    );
     let Parametere: WhereFilterOp = Para;
     let Parametere1: WhereFilterOp = Para1;
     let conditions: WhereFilterOp = operator;
     let conditions1: WhereFilterOp = operator1;
     var qu;
-    let orderbyvalue = "sin";
-    
-    if (operator == "!==" || operator == ">" || operator == "<" || operator == ">=" || operator == "<=") {
+    let orderbyvalue = 'sin';
+
+    if (
+      operator == '!==' ||
+      operator == '>' ||
+      operator == '<' ||
+      operator == '>=' ||
+      operator == '<='
+    ) {
       orderbyvalue = Para;
     }
     if (getall == true) {
-      if (Parametere != undefined && operator != undefined && value != undefined) {
+      if (
+        Parametere != undefined &&
+        operator != undefined &&
+        value != undefined
+      ) {
         console.log(1);
-        
-        qu = query(catData,
-          where(Parametere, conditions, value),
-          where('type', 'array-contains', 'storeORDER'),
-          orderBy(orderbyvalue, 'desc')
-        );
-      }
-      else {
-        console.log("get ALL")
-        qu = query(catData,
-          where("type", 'array-contains', "storeORDER"),
-          orderBy(orderbyvalue, "desc"),
-        );
-      }
-    }
-    else {
-      if (Parametere != undefined && operator != undefined && value != undefined) {
-        console.log("parameter = "+ Parametere);
-        console.log("operator = "+ operator);
-        console.log("value = "+ value);
-        console.log("orderbyvalue = "+ orderbyvalue);
 
         qu = query(
           catData,
           where(Parametere, conditions, value),
-          where("type", 'array-contains', "storeORDER"),
-          orderBy(orderbyvalue, "desc"),
+          where('type', 'array-contains', 'storeORDER'),
+          orderBy(orderbyvalue, 'desc')
+        );
+      } else {
+        console.log('get ALL');
+        qu = query(
+          catData,
+          where('type', 'array-contains', 'storeORDER'),
+          orderBy(orderbyvalue, 'desc')
+        );
+      }
+    } else {
+      if (
+        Parametere != undefined &&
+        operator != undefined &&
+        value != undefined
+      ) {
+        console.log('parameter = ' + Parametere);
+        console.log('operator = ' + operator);
+        console.log('value = ' + value);
+        console.log('orderbyvalue = ' + orderbyvalue);
+
+        qu = query(
+          catData,
+          where(Parametere, conditions, value),
+          where('type', 'array-contains', 'storeORDER'),
+          orderBy(orderbyvalue, 'desc'),
           // startAfter()
-          limit(c),
+          limit(c)
         );
       } else {
         console.log(4);
 
-        qu = query(catData,
-          where("type", 'array-contains', "storeORDER"),
-          orderBy(orderbyvalue, "desc"),
-          limit(c),
+        qu = query(
+          catData,
+          where('type', 'array-contains', 'storeORDER'),
+          orderBy(orderbyvalue, 'desc'),
+          limit(c)
         );
       }
     }
@@ -202,15 +223,20 @@ export class ApiserviceService {
     return collectionData(qu);
   }
 
-  getRecentStores(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
-    console.log("c = "+ c);
-    console.log("getall = " + getall);
-    console.log("para = "+ Para);
-    console.log("operator = "+operator);
-    console.log("Value "+value )
-    
-    
-    const catData: CollectionReference = collection(this.firestore, "shops");
+  getRecentStores(
+    c: number,
+    getall: boolean,
+    Para?: any,
+    operator?: any,
+    value?: any
+  ) {
+    console.log('c = ' + c);
+    console.log('getall = ' + getall);
+    console.log('para = ' + Para);
+    console.log('operator = ' + operator);
+    console.log('Value ' + value);
+
+    const catData: CollectionReference = collection(this.firestore, 'shops');
     let Parametere: WhereFilterOp = Para;
     let conditions: WhereFilterOp = operator;
     let qu;
@@ -226,10 +252,15 @@ export class ApiserviceService {
     }
 
     if (getall == true) {
-      if (Parametere != undefined && operator != undefined && value != undefined) {
-        console.log("1.1");
-        
-        qu = query(catData,
+      if (
+        Parametere != undefined &&
+        operator != undefined &&
+        value != undefined
+      ) {
+        console.log('1.1');
+
+        qu = query(
+          catData,
           where(Parametere, conditions, value),
           orderBy(orderbyvalue, 'desc')
         );
@@ -414,4 +445,28 @@ export class ApiserviceService {
 
   nodeList: any[] = [];
   nodesData: any[] = JSON.parse(localStorage.getItem('nodesData') || '[]');
+
+  getNodeData() {
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'node_manager'}`
+    );
+
+    const qu = query(manageNode);
+
+    return collectionData(qu);
+  }
+
+  updateNodeData(uid: string, nodeData: any) {
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'node_manager'}`
+    );
+
+    const qu = doc(this.firestore, 'node_manager', `${uid}`);
+
+    return updateDoc(qu, {
+      name: nodeData.name,
+    });
+  }
 }
