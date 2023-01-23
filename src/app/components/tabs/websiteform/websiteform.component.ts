@@ -64,7 +64,8 @@ export class WebsiteformComponent implements OnInit {
         this.formtype = 'M-Inquiry';
       }
     }
-    this.apiservice.getFormData(
+    this.apiservice
+      .getFormData(
         20,
         this.formtype,
         tabChangeEvent?.index == 0 || tabChangeEvent == undefined ? false : true
@@ -86,6 +87,4 @@ export class WebsiteformComponent implements OnInit {
       new Date(date.seconds * 1000).toDateString()
     );
   }
-
-  
 }

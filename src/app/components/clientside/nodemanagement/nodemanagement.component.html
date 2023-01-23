@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <ng-container *ngIf="this.as.nodeList.length > 0">
+    <ng-container>
         <div class="t30padding b15padding m_size boldtext">
             City
         </div>
@@ -30,10 +30,10 @@
                 <ng-container matColumnDef="node">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder lborder">Node
                     </th>
-                    <td class="rborder lborder" mat-cell *matCellDef="let row">{{row.nodeNum}}</td>
+                    <td class="rborder lborder" mat-cell *matCellDef="let row">{{row.name}}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="area">
+                <!-- <ng-container matColumnDef="area">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder tborder">Area
                     </th>
                     <td class="rborder tborder" mat-cell *matCellDef="let row">
@@ -47,7 +47,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder tborder">Used in
                     </th>
                     <td class="rborder tborder" mat-cell *matCellDef="let row"> {{row.used_in[0].item_text}} </td>
-                </ng-container>
+                </ng-container> -->
 
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="table-heading rborder lborder tborder">
@@ -88,14 +88,14 @@
                 </tr>
             </table>
 
-            <mat-paginator *ngIf="this.as.nodeList.length == 10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
                 aria-label="Select page of periodic elements">
             </mat-paginator>
         </div>
     </ng-container>
 
 
-    <div *ngIf="this.as.nodeList.length == 0">
+    <!-- <div *ngIf="this.as.nodeList.length == 0">
         <div class="c_align">
             <svg class="M50width" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
                 <g id="freepik--Floor--inject-4">
@@ -1172,6 +1172,6 @@
             </svg>
         </div>
 
-    </div>
+    </div> -->
 
 </div>
