@@ -115,7 +115,7 @@ export class OrdersComponent implements OnInit {
   }
 
   execute() {
-    this.apiservice.getRecentAddedOrder(100, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(1000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
       this.orderdatasource = new MatTableDataSource(recentorders);
       this.orderdatasource.sort = this.sort;
     });
@@ -137,7 +137,7 @@ export class OrdersComponent implements OnInit {
 
 
   exportexcel() {
-    this.apiservice.getRecentAddedOrder(10, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(1000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
       this.recentorderss = "";
       this.recentorderss = recentorders;
       for (let i = 0; i < this.recentorderss.length; i++) {
