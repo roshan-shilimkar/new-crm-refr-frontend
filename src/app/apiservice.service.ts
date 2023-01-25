@@ -138,17 +138,17 @@ export class ApiserviceService {
       where("sid", "==", sid),
       orderBy("sin", "desc"),
     );
-    const qu = query(catData, where('sid', '==', sid), orderBy('sin', 'desc'));
     return collectionData(qu);
   }
 
 
-  getRecentAddedOrder(c: number, getall: boolean, Para?: any, operator?: any, value?: any) {
+  getRecentAddedOrder(c: number, getall: boolean, Para?: any,operator?: any,value?: any ,Para1?:any, operator1?:any,value1?: any  ) {
     const catData: CollectionReference = collection(this.firestore, `${'walt'}`);
     let Parametere: WhereFilterOp = Para;
     let Parametere1: WhereFilterOp = Para1;
     let conditions: WhereFilterOp = operator;
-    let conditions1: WhereFilterOp = operator1;
+    // let conditions1: WhereFilterOp = operator1;
+
     var qu;
     let orderbyvalue = "sin";
     
