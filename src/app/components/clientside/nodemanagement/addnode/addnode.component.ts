@@ -13,6 +13,21 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { AuthService } from 'src/app/auth.service';
 import { take } from 'rxjs';
 
+// firebase
+import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  CollectionReference,
+  onSnapshot,
+  getDocs,
+  query,
+  where,
+  addDoc,
+} from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-addnode',
   templateUrl: './addnode.component.html',
@@ -46,7 +61,7 @@ export class AddnodeComponent implements OnInit {
     },
   ];
 
-  area: Array<any> = [
+  cities: Array<any> = [
     {
       Title: 'Select area',
       titvalue: '',
@@ -69,7 +84,8 @@ export class AddnodeComponent implements OnInit {
     public rs: Router,
     public fb: FormBuilder,
     public ar: ActivatedRoute,
-    public auth: AuthService
+    public auth: AuthService,
+    private firestore: Firestore
   ) {
     // firebase
   }
@@ -86,7 +102,6 @@ export class AddnodeComponent implements OnInit {
     this.usedInList = [
       { item_id: 1, item_text: 'Brands in your neighbourhood' },
       { item_id: 2, item_text: 'New store in your hood' },
-      { item_id: 3, item_text: 'New store in your kalyan' },
     ];
     // this.selectedItems = [
     //   { item_id: 3, item_text: 'Pune' },
@@ -126,12 +141,23 @@ export class AddnodeComponent implements OnInit {
     console.log(items);
   }
 
-  execute(nodeData: {
-    city: string;
-    node: string;
-    area: string;
-    used_in: string;
-  }) {
+  async execute(nodeData: any) {
     console.log(nodeData, 'exe');
+
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'node_manager'}`
+    );
+
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(this.firestore, 'node_manager'), {
+      city: nodeData.city,
+      name: nodeData.name,
+      areas: nodeData.areas,
+      used_in: nodeData.used_in,
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
+    console.log('Document written with ID: ', docRef.id);
   }
 }

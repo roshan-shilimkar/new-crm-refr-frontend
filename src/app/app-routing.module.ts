@@ -12,6 +12,10 @@ import { VisitsharedetailsComponent } from './components/clientside/homescreen/v
 import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
 import { AddnodeComponent } from './components/clientside/nodemanagement/addnode/addnode.component';
 import { NodemanagementComponent } from './components/clientside/nodemanagement/nodemanagement.component';
+import { CategorysectioninternalComponent } from './components/internalsection/homegrownbrands/categorysectioninternal/categorysectioninternal.component';
+import { HomegrownbrandsComponent } from './components/internalsection/homegrownbrands/homegrownbrands.component';
+import { InternalsectionComponent } from './components/internalsection/internalsection.component';
+import { VisitshareinternalComponent } from './components/internalsection/visitshareinternal/visitshareinternal.component';
 import { DashboardComponent } from './components/tabs/dashboard/dashboard.component';
 import { MerchantsProfileComponent } from './components/tabs/merchants/merchants-profile/merchants-profile.component';
 import { MerchantsComponent } from './components/tabs/merchants/merchants.component';
@@ -60,6 +64,12 @@ const routes: Routes = [
       { path: 'brands', component: BrandsneighbourhoodComponent },
       //
       { path: 'homebrands', component: HomegrowbrandsComponent },
+
+      // internal sections
+      { path: 'internalsec', component: InternalsectionComponent },
+      { path: 'homegrownintsec', component: HomegrownbrandsComponent },
+      { path: 'categorysec', component: CategorysectioninternalComponent },
+      { path: 'visitshareinternal', component: VisitshareinternalComponent },
     ],
   },
 ];
