@@ -2,11 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { type } from 'os';
 import { take } from 'rxjs';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import { ExcelexportService } from 'src/app/excelexport.service';
-
 
 
 @Component({
@@ -63,26 +61,19 @@ export class RedeemreqComponent implements OnInit {
       Title: "Order Total", titvalue: "amTotal",
     }
   ];
-
   inputtype = "string";
-
-
   redeemColumns: string[] = [
     'Details',
     'Cust_Details',
     'Store_Details',
     'Sale_type',
     'Order_value',
-    // 'CashbackAmt',
-    // 'city',
     'r_status',
     'action',
   ];
 
   redeemreqdatasource!: MatTableDataSource<any>;
-  constructor(
-    private apiservice: ApiserviceService, private excelservice: ExcelexportService
-  ) { }
+  constructor( private apiservice: ApiserviceService, private excelservice: ExcelexportService ) { }
 
   ngOnInit(): void {
   }
@@ -92,7 +83,6 @@ export class RedeemreqComponent implements OnInit {
       this.execute();
     }, 1000);
   }
-
 
   execute() {
     if(this.inputtype == "number" && typeof(this.searchvalue) != "number" ){
@@ -129,7 +119,6 @@ export class RedeemreqComponent implements OnInit {
       }
       this.excelservice.exportasexcelfile(this.excelarr, "demo");
     });
-
   }
 
   onChange() {

@@ -145,27 +145,6 @@ export class MerchantsComponent implements OnInit {
 
   execute() {
     this.apiservice.getRecentStores(10000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentStore: any) => {
-      // console.log(recentStore);
-
-
-
-
-      // for (let i = 0; i < recentStore.length; i++) {
-      //   const body = {
-      //     searchData: recentStore[i],
-      //     searchIndex: "things"
-      //   }
-      //   console.log(body);
-      //   // const headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
-      //   // const body = { title: 'Angular POST Request Example' };
-      //   // this.https.post<any>('https://us-central1-refr-india.cloudfunctions.net/ind_serve/api/search/elastic/add/IN', body).subscribe(data => {
-      //   //     // this.postId = data.id;
-      //   //     console.log(i +"= success");
-      //   // });
-      // }
-
-
-
       this.MerchantdataSource = new MatTableDataSource(recentStore);
       this.MerchantdataSource.sort = this.sort;
     });
@@ -188,6 +167,4 @@ export class MerchantsComponent implements OnInit {
       this.excelservice.exportasexcelfile(this.excelarr, "demo");
     });
   }
-
-  next() { }
 }

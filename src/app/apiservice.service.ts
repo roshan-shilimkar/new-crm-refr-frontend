@@ -44,7 +44,7 @@ export class ApiserviceService {
     private firestore: Firestore,
     private fireStorage: Storage,
     private angularFirestore: AngularFirestore
-  ) {}
+  ) { }
 
   get getServerTimestamp() {
     return serverTimestamp;
@@ -457,7 +457,6 @@ export class ApiserviceService {
     );
 
     const qu = query(manageNode);
-
     return collectionData(qu);
   }
 

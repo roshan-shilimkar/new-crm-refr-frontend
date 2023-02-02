@@ -11,15 +11,10 @@
         <span class="xxl_size boldtext lr15padding AScenter">Visit share earn</span>
     </div>
 
-    <div class="t50margin lr55padding">
-
+    <div class="t50margin">
         <div class="l_size boldtext b20margin">
             City banners
         </div>
-
-
-        <!--  -->
-
         <div class="Aborder M50width A30padding b30margin">
             <div class="c_align">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,12 +60,9 @@
                 {{ progress }}%
             </div>
         </div>
-
         <div class="t10margin b10margin" *ngIf="message" role="alert">
             {{ message }}
         </div>
-
-
         <div class="t10margin b30margin">
             <div class="m_size boldtext">List of Images</div>
             <div class="m_size boldtext" *ngIf="preview < '0'">
@@ -151,7 +143,6 @@
                         Delete
                     </div>
                 </main>
-
             </section>
             <section>
                 <main>
@@ -161,15 +152,11 @@
                         </mat-icon>
                     </div>
                 </main>
-
             </section>
         </div>
-
-
         <div class="l_size boldtext b20margin">
             Info cards
         </div>
-
         <div *ngFor="let x of [0,1,2,3]">
             <div class="dflex AIcenter M50width Aborder A10padding A5radius cursor_pointer b20margin">
                 <div class="m_size regulartext" *ngIf="x == 0">Info Card 1</div>
@@ -177,21 +164,17 @@
                 <div class="m_size regulartext" *ngIf="x == 2">Info Card 3</div>
                 <div class="m_size regulartext" *ngIf="x == 3">Info Card 4</div>
                 <span class="divide"></span>
-
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 18L15 12L9 6" stroke="black" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
-
             </div>
         </div>
-
-
-        <button mat-button routerLink="/categorysec"
+        <!-- <button mat-button routerLink="/categorysec"
             class="s_size semiboldtext purple_background normallineheight tb5padding l15padding r15padding White_txt">
             Next
-        </button>
-
+        </button> -->
+        <button mat-button routerLink="/categorysec"
+                class="crud_ctas s_size semiboldtext purple_background normallineheight White_txt r10margin">Next</button>
     </div>
-
 </div>

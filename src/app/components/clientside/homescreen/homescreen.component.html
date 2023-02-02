@@ -2,45 +2,31 @@
     <div class="dflex">
         <span class="xxl_size boldtext r15padding AScenter">Homescreen module</span>
     </div>
-
-    <div class="t50margin">
-
-        <div class="theader dflex JCevenly w90">
-            <div class="l_size regulartext custom_gray M33width c_align">Section name</div>
-            <div class="l_size regulartext custom_gray M33width c_align">Visibility</div>
-            <div class="l_size regulartext custom_gray M33width c_align">Action</div>
-
+    <div class="t50margin boxshw">
+        <div class="dflex JCevenly M100width tb15padding s_size">
+            <div class="M5width"></div>
+            <div class="regulartext M45width">Section name</div>
+            <div class="regulartext M25width c_align">Visibility</div>
+            <div class="regulartext M25width c_align">Action</div>
         </div>
-
         <div cdkDropListGroup>
-            <div class="example-container M80width">
+            <div class="example-container M100width">
                 <div cdkDropList [cdkDropListData]="feedSection" class="example-list"
                     (cdkDropListDropped)="drop($event)">
-                    <div class="example-box A20margin Aborder" *ngFor="let item of feedSection" cdkDrag>
-                        <div>
+                    <div class="example-box tborder s_size" *ngFor="let item of feedSection" cdkDrag>
+                        <div class="M5width dflex JCcenter">
                             <mat-icon>menu</mat-icon>
                         </div>
-                        <div class="M33width l_align ml_rem_5 l_size boldtext ">
+                        <div class="M45width l_align">
                             {{item.feed}}
                         </div>
-                        <div class="M20width c_align l_size boldtext ">
+                        <div class="M25width c_align">
                             Public
                         </div>
-                        <div class="w25 r_align r20margin ml_rem_5">
-                            <a [routerLink]="item.link" class="cursor_pointer">
-                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12.833 4.66675H4.66634C4.0475 4.66675 3.45401 4.91258 3.01643 5.35017C2.57884 5.78775 2.33301 6.38124 2.33301 7.00008V23.3334C2.33301 23.9523 2.57884 24.5457 3.01643 24.9833C3.45401 25.4209 4.0475 25.6667 4.66634 25.6667H20.9997C21.6185 25.6667 22.212 25.4209 22.6496 24.9833C23.0872 24.5457 23.333 23.9523 23.333 23.3334V15.1667"
-                                        stroke="#1F1F1F" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M21.583 2.91677C22.0471 2.45264 22.6766 2.19189 23.333 2.19189C23.9894 2.19189 24.6189 2.45264 25.083 2.91677C25.5471 3.3809 25.8079 4.01039 25.8079 4.66677C25.8079 5.32315 25.5471 5.95264 25.083 6.41677L13.9997 17.5001L9.33301 18.6668L10.4997 14.0001L21.583 2.91677Z"
-                                        stroke="#1F1F1F" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
+                        <div class="M25width c_align">
+                            <a [routerLink]="item.link">
+                                <mat-icon class="black_text">edit</mat-icon>
                             </a>
-
                         </div>
                     </div>
                 </div>

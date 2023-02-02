@@ -6,16 +6,17 @@
   width: 50%;
   background: white;
   list-style: none;
-  //   position: absolute;
-  //   z-index: 1;
+  
   .areas {
     border-bottom: 1px solid lightgray;
     padding: 8px 0;
     cursor: pointer;
   }
+
   .areas:hover {
     background-color: #f1f1f1;
   }
+
   .areas:last-child {
     border-bottom: none;
   }
@@ -30,6 +31,7 @@
   cursor: pointer;
   border-radius: 20px;
   margin-right: 10px;
+
   .close {
     margin-left: 5px;
   }
@@ -37,4 +39,8 @@
 
 input.ng-touched.ng-invalid {
   border-color: red;
+}
+
+.multiselect-dropdown {
+  width: 40% !important;
 }

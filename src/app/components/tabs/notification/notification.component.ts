@@ -79,11 +79,6 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ApplyFilter() {
-    // this.
-  }
-
-
   doSomething() {
     this.filters = this.CustOrMech == 0 ? this.CustFilter : this.MerchFilter;
   }
@@ -92,8 +87,6 @@ export class NotificationComponent implements OnInit {
     this.Filtervalue = undefined;
     this.typeoffilterinput = this.FIlterName.type;
   }
-
-
 
   sendwhatsappNotification() {
     let headers = new HttpHeaders({
@@ -132,7 +125,5 @@ export class NotificationComponent implements OnInit {
       )
       .subscribe((data) => {
       });
-
   }
-
 }

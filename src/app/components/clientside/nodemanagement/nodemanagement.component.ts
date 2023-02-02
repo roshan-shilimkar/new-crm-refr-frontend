@@ -53,8 +53,15 @@ export class NodemanagementComponent implements OnInit {
 
   async execute() {
     this.as.getNodeData().subscribe((data: any) => {
-      console.log('data', data);
-      this.nodes = new MatTableDataSource(data);
+      let dataN:Array<any>=[];
+      for(let i = 0; i<data.length;i++){
+        console.log(data[i]);
+        if(data[i].city != undefined && data[i].city != '' && data[i].created_at != undefined && data[i].used_in != "" )
+        dataN.push(data[i]);
+      }
+      console.log('data', dataN);
+
+      this.nodes = new MatTableDataSource(dataN);
       this.nodes.paginator = this.paginator;
       this.nodes.sort = this.sort;
     });
