@@ -30,6 +30,8 @@ export class TabsComponent implements OnInit {
         { tit: 'Node management', link: '/nodemanage' },
         { tit: 'Homescreen', link: '/homescreen' },
         { tit: 'Internal section', link: '/internalsec' },
+        { tit: 'Settings', link: '/settings' },
+
       ],
     },
   ];

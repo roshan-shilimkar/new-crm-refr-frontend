@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import {
@@ -16,6 +16,7 @@ import {
   addDoc,
 } from 'firebase/firestore';
 import { Firestore } from '@angular/fire/firestore';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-addnode',
@@ -23,44 +24,19 @@ import { Firestore } from '@angular/fire/firestore';
   styleUrls: ['./addnode.component.scss'],
 })
 export class AddnodeComponent implements OnInit {
-  usedInList: any = [];
-  usedInListItems: any = [];
-  usedInSetting!: IDropdownSettings;
-  dropdownList: any = [];
-  selectedItems: any = [];
+  selectedareas: any = [];
   dropdownSettings!: IDropdownSettings;
   searchvalue: any;
   valuetype: number = 2;
   Valuearr: Array<any> = [];
-
-  ParaArr: Array<any> = [
-    {
-      Title: 'Mumbai',
-      titvalue: 'mumbai',
-    },
-    {
-      Title: 'New Mumbai',
-      titvalue: 'kalyan',
-    }
-  ];
-
-  cities: Array<any> = [
-    {
-      Title: 'Select area',
-      titvalue: '',
-    },
-    {
-      Title: 'Vileparle West 400056',
-      titvalue: 'Vileparle West 400056',
-    },
-    {
-      Title: 'Santacruz East 400056',
-      titvalue: 'Santacruz East 400056',
-    },
-  ];
-
-  // firebase
+  cityarr: Array<any> = [];
+  dropdownList: Array<any> = [];
+  cityindex?: number;
+  Nodename: string = "";
   @ViewChild('nodeForm') nodeForm?: NgForm;
+  selectedareafiltered: Array<any> = [];
+  selectedcity: any;
+  isselectdisable: boolean = false;
 
   constructor(
     public as: ApiserviceService,
@@ -68,75 +44,123 @@ export class AddnodeComponent implements OnInit {
     public fb: FormBuilder,
     public ar: ActivatedRoute,
     public auth: AuthService,
-    private firestore: Firestore
+    public api: ApiserviceService,
+    public dialogRef: MatDialogRef<AddnodeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // firebase
+    if (this.data.id != undefined && this.data.nodedata != undefined) {
+      this.Nodename = this.data.nodedata.name;
+      this.selectedcity = this.data.nodedata.city_id;
+      // this.dropdownList = 
+      this.isselectdisable = true;
+      for (let i = 0; i < this.data.nodedata.Nareas.length; i++) {
+        this.selectedareas.push({
+          Area_N: this.data.nodedata.Nareas[i].Area_N,
+          id: this.data.nodedata.Nareas[i].id,
+        })
+      }
+    }
   }
 
   ngOnInit(): void {
-    this.dropdownList = [
-      { item_id: 1, Node_area_name: 'Vileparle East', node_pincode:'400057' },
-      { item_id: 2, Node_area_name: 'Santacruz East', node_pincode:'400056' },
-      { item_id: 3, Node_area_name: 'Santacruz East', node_pincode:'400056' },
-      { item_id: 4, Node_area_name: 'Vileparle East', node_pincode:'400057' },
-      { item_id: 5, Node_area_name: 'Santacruz East', node_pincode:'400056' },
-      { item_id: 6, Node_area_name: 'Santacruz East', node_pincode:'400056' },
-    ];
-    this.usedInList = [
-      { item_id: 1, item_text: 'Brands in your neighbourhood' },
-      { item_id: 2, item_text: 'New store in your hood' },
-    ];
+    this.getallcity();
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 2,
-      allowSearchFilter: true,
-    };
-    this.usedInSetting = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
+      idField: 'id',
+      textField: 'Area_N',
       itemsShowLimit: 2,
       allowSearchFilter: true,
     };
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-
-  onUsedIn(item: any) {
-    console.log(item);
-  }
-  onUsed(items: any) {
-    console.log(items);
-  }
-
-  async execute(nodeData: any) {
-    console.log(nodeData, 'exe');
-
-    const manageNode: CollectionReference = collection(
-      this.firestore,
-      `${'node_manager'}`
+  addarea(event: any) {
+    console.log(event);
+    let index = this.dropdownList.findIndex((x: any) =>
+      x.id == event.id
     );
+    let data = {
+      id: this.data.nodedata.id,
+      areadata: {
+        Area_N: this.dropdownList[index].Area_N,
+        Area_Pin: this.dropdownList[index].Area_Pin,
+        CDateTime: this.dropdownList[index].CDateTime,
+        MDateTime: this.dropdownList[index].MDateTime,
+        id: this.dropdownList[index].id,
+        isaddedincity: this.dropdownList[index].isaddedincity,
+      }
+    }
+    this.api.addnodearea(data);
+  }
 
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(this.firestore, 'node_manager'), {
-      city: nodeData.city,
-      name: nodeData.name,
-      areas: nodeData.areas,
-      used_in: nodeData.used_in,
-      created_at: new Date(),
-      updated_at: new Date(),
+  removearea(event: any) {
+    let index = this.dropdownList.findIndex((x: any) =>
+      x.id == event.id
+    );
+    let data = {
+      id: this.data.nodedata.id,
+      areadata: {
+        Area_N: this.dropdownList[index].Area_N,
+        Area_Pin: this.dropdownList[index].Area_Pin,
+        CDateTime: this.dropdownList[index].CDateTime,
+        MDateTime: this.dropdownList[index].MDateTime,
+        id: this.dropdownList[index].id,
+        isaddedincity: this.dropdownList[index].isaddedincity,
+      }
+    }
+
+    this.api.removenodearea(data);
+  }
+
+  citychange(i: number) {
+    this.cityindex = i;
+    this.dropdownList = this.cityarr[i].Areas;
+  }
+
+  getallcity() {
+    this.api.getcity().subscribe((data: any) => {
+      this.cityarr = [];
+      this.cityarr = data;
+      if (this.data.id != undefined && this.data.nodedata != undefined) {
+        let index = this.cityarr.findIndex((x:any)=>
+        x.id= this.data.nodedata.city_id
+        );
+      this.dropdownList = this.cityarr[index].Areas;
+      }
     });
-    console.log('Document written with ID: ', docRef.id);
+  }
+
+
+  addnode() {
+    if (this.Nodename == undefined) {
+      alert("Please enter the node name.")
+    }
+    else if (this.cityindex == undefined) {
+      alert("please select the city");
+    }
+    else if (this.selectedareas.length == 0) {
+      alert("please select the areas.")
+    }
+    else {
+      for (let i = 0; i < this.selectedareas.length; i++) {
+        let j = this.cityarr[this.cityindex].Areas.findIndex((a: any) => a.id == this.selectedareas[i].id);
+        this.selectedareafiltered.push(this.cityarr[this.cityindex].Areas[j]);
+      }
+      let datas = {
+        city: this.cityarr[this.cityindex].CityN,
+        city_id: this.cityarr[this.cityindex].id,
+        name: this.Nodename,
+        Nareas: this.selectedareafiltered,
+        created_at: this.api.newTimestamp,
+        updated_at: this.api.newTimestamp,
+      }
+      this.api.addnode(datas).then((data) => {
+        if (data == undefined) {
+          alert("Node added");
+          this.dialogRef.close();
+        }
+      }).catch(() => {
+        return false;
+      });
+    }
   }
 }

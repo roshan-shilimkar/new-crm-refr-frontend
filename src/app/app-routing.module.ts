@@ -12,6 +12,8 @@ import { VisitsharedetailsComponent } from './components/clientside/homescreen/v
 import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
 import { AddnodeComponent } from './components/clientside/nodemanagement/addnode/addnode.component';
 import { NodemanagementComponent } from './components/clientside/nodemanagement/nodemanagement.component';
+import { AddcityAndAreaComponent } from './components/clientside/setting/addcity-and-area/addcity-and-area.component';
+import { SettingComponent } from './components/clientside/setting/setting.component';
 import { CategorysectioninternalComponent } from './components/internalsection/homegrownbrands/categorysectioninternal/categorysectioninternal.component';
 import { HomegrownbrandsComponent } from './components/internalsection/homegrownbrands/homegrownbrands.component';
 import { InternalsectionComponent } from './components/internalsection/internalsection.component';
@@ -47,28 +49,23 @@ const routes: Routes = [
       {
         path: 'nodemanage',
         component: NodemanagementComponent,
-        // children: [{ path: 'addnode', component: AddnodeComponent }],
       },
       { path: 'addnode/:id', component: AddnodeComponent },
       { path: 'homescreen', component: HomescreenComponent },
-      //
       { path: 'feedmodule', component: TopfeedmoduleComponent },
       { path: 'feedsection', component: FeedsectionComponent },
-      //
       { path: 'visitmodule', component: VisitsharemoduleComponent },
       { path: 'visitdetails', component: VisitsharedetailsComponent },
       { path: 'storedetails/:id', component: VisitallstoredetailsComponent },
       { path: 'addstore/:id', component: VisitaddstoredetailsComponent },
       { path: 'visit_editstore', component: VisiteditstoredetailsComponent },
-      //
       { path: 'brands', component: BrandsneighbourhoodComponent },
-      //
       { path: 'homebrands', component: HomegrowbrandsComponent },
-
-      // internal sections
       { path: 'internalsec', component: InternalsectionComponent },
       { path: 'homegrownintsec', component: HomegrownbrandsComponent },
       { path: 'categorysec', component: CategorysectioninternalComponent },
+      { path: 'settings', component: SettingComponent },
+      { path: 'addcityarea/:id', component: AddcityAndAreaComponent },
       { path: 'visitshareinternal', component: VisitshareinternalComponent },
     ],
   },

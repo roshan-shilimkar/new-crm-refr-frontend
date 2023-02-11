@@ -182,6 +182,7 @@ export class OrdersComponent implements OnInit {
           GateWay_charges: this.recentorderss[i].amGateway,
           Total: this.recentorderss[i].amTotal,
           Order_status: orderstatus,
+          deliveryCharge:this.recentorderss[i].amParcel
         });
       }
       this.excelservice.exportasexcelfile(this.excelarr, "demo");

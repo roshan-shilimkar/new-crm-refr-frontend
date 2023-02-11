@@ -67,6 +67,8 @@ import { HomegrownbrandsComponent } from './components/internalsection/homegrown
 import { InternalsectionComponent } from './components/internalsection/internalsection.component';
 import { CategorysectioninternalComponent } from './components/internalsection/homegrownbrands/categorysectioninternal/categorysectioninternal.component';
 import { VisitshareinternalComponent } from './components/internalsection/visitshareinternal/visitshareinternal.component';
+import { SettingComponent } from './components/clientside/setting/setting.component';
+import { AddcityAndAreaComponent } from './components/clientside/setting/addcity-and-area/addcity-and-area.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +104,8 @@ import { VisitshareinternalComponent } from './components/internalsection/visits
     InternalsectionComponent,
     CategorysectioninternalComponent,
     VisitshareinternalComponent,
+    SettingComponent,
+    AddcityAndAreaComponent,
   ],
   imports: [
     MatDialogModule,

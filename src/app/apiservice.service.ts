@@ -4,46 +4,27 @@ import {
   Firestore,
   collection,
   collectionData,
-  collectionGroup,
   doc,
   getDoc,
-  docData,
-  setDoc,
   updateDoc,
   addDoc,
   query,
   limit,
   orderBy,
   where,
-  FieldValue,
-  increment,
   serverTimestamp,
-  arrayUnion,
-  arrayRemove,
-  DocumentReference,
   CollectionReference,
-  onSnapshot,
-  startAt,
-  endAt,
-  getDocs,
-  startAfter,
 } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
-
-import { Storage, ref, uploadString } from '@angular/fire/storage';
-import { getDownloadURL } from '@firebase/storage';
-//import { Hype, Product } from '../universal.model';
-import { deleteDoc, FieldPath, WhereFilterOp } from 'firebase/firestore';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { arrayRemove, arrayUnion, deleteDoc, WhereFilterOp } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiserviceService {
+  newTimestamp = this.getServerTimestamp();
+
   constructor(
     private firestore: Firestore,
-    private fireStorage: Storage,
-    private angularFirestore: AngularFirestore
   ) { }
 
   get getServerTimestamp() {
@@ -234,11 +215,6 @@ export class ApiserviceService {
     operator?: any,
     value?: any
   ) {
-    console.log('c = ' + c);
-    console.log('getall = ' + getall);
-    console.log('para = ' + Para);
-    console.log('operator = ' + operator);
-    console.log('Value ' + value);
 
     const catData: CollectionReference = collection(this.firestore, 'shops');
     let Parametere: WhereFilterOp = Para;
@@ -261,15 +237,12 @@ export class ApiserviceService {
         operator != undefined &&
         value != undefined
       ) {
-        console.log('1.1');
-
         qu = query(
           catData,
           where(Parametere, conditions, value),
           orderBy(orderbyvalue, 'desc')
         );
       } else {
-        console.log('1.2');
         qu = query(catData, orderBy(orderbyvalue, 'desc'));
       }
     } else {
@@ -278,7 +251,6 @@ export class ApiserviceService {
         operator != undefined &&
         value != undefined
       ) {
-        console.log('2.1');
         qu = query(
           catData,
           where(Parametere, conditions, value),
@@ -286,7 +258,6 @@ export class ApiserviceService {
           limit(c)
         );
       } else {
-        console.log('2.2');
         qu = query(catData, orderBy(orderbyvalue, 'desc'), limit(c));
       }
     }
@@ -421,14 +392,92 @@ export class ApiserviceService {
   //   return collectionData(qu);
   // }
 
+
+
+  getarea() {
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'Areas'}`
+    );
+
+    const qu = query(manageNode);
+    return collectionData(qu);
+  }
+
+  deletearea(id: any) {
+    const arearefr = doc(this.firestore, `Areas`, `${id}`);
+    return deleteDoc(arearefr);
+  }
+
+  async addarea(data: any) {
+    const addedcity = await addDoc(collection(this.firestore, "Areas"), data).then(ref => {
+      const areeas = doc(this.firestore, 'Areas', `${ref.id}`)
+      return updateDoc(areeas, { id: ref.id }).then(() => { return ref; })
+    })
+  }
+
+  getcity() {
+    const manageNode: CollectionReference = collection(
+      this.firestore,
+      `${'cities'}`
+    );
+
+    const qu = query(manageNode);
+    return collectionData(qu);
+  }
+
+
+  deletecity(id: any) {
+    const cityrefr = doc(this.firestore, `${'cities'}`, `${id}`);
+    return deleteDoc(cityrefr);
+  }
+
+  async addcity(data: any) {
+    console.log(data);
+    const addedcity = await addDoc(collection(this.firestore, `${'cities'}`), data).then(ref => {
+      const areeas = doc(this.firestore, `${'cities'}`, `${ref.id}`)
+      return updateDoc(areeas, { id: ref.id }).then(() => { return ref; })
+    });
+  }
+
+  updatecity(data: any) {
+    const cityrefr = doc(this.firestore, `${'cities'}`, `${data.id}`);
+    return updateDoc(cityrefr, { CityN: data.CityN, CitySN: data.CitySN, MDateTime: data.MDateTime }).then((datas: any) => {
+      console.log("*****");
+      console.log(datas)
+      console.log("*****");
+      if (datas) {
+        return "issue in city update";
+      }
+      else {
+        return "city updated";
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
+  }
+
+  
+
+
+  addcityarea(data:any){
+    const cityrefr = doc(this.firestore, `${'cities'}`, `${data.id}`);
+    return updateDoc(cityrefr, { Areas: arrayUnion(data.areadata) });
+  }
+
+  removecityarea(data: any) {
+    const cityrefr = doc(this.firestore, `${'cities'}`, `${data.id}`);
+    return updateDoc(cityrefr, { Areas: arrayRemove(data.areadata) });
+  }
+
   getUserByUID(UID: string) {
     const userRef = doc(this.firestore, `${'users'}`, `${UID}`);
     return getDoc(userRef);
   }
 
   getFormData(c: number, paravalue: string, tab: any) {
-    console.log('BILL ME');
-
     const catData: CollectionReference = collection(
       this.firestore,
       `${'reminders'}`
@@ -455,21 +504,56 @@ export class ApiserviceService {
       this.firestore,
       `${'node_manager'}`
     );
-
     const qu = query(manageNode);
     return collectionData(qu);
   }
+
+  deletenode(id: any) {
+    const noderefr = doc(this.firestore, `${'node_manager'}`, `${id}`);
+    return deleteDoc(noderefr);
+  }
+
 
   updateNodeData(uid: string, nodeData: any) {
     const manageNode: CollectionReference = collection(
       this.firestore,
       `${'node_manager'}`
     );
-
     const qu = doc(this.firestore, 'node_manager', `${uid}`);
-
     return updateDoc(qu, {
       name: nodeData.name,
     });
   }
+
+  addnodearea(data:any){
+    const noderefr = doc(this.firestore, `${'node_manager'}`, `${data.id}`);
+    return updateDoc(noderefr, { Nareas: arrayUnion(data.areadata) });
+  }
+  
+  removenodearea(data: any) {
+    const noderefr = doc(this.firestore, `${'node_manager'}`, `${data.id}`);
+    return updateDoc(noderefr, { Nareas: arrayRemove(data.areadata) });
+  }
+
+  async addnode(data: any) {
+    console.log(data);
+    const addedcity = await addDoc(collection(this.firestore, "node_manager"), data).then(ref => {
+      const areeas = doc(this.firestore, 'node_manager', `${ref.id}`)
+      return updateDoc(areeas, { id: ref.id }).then(() => { return ref; })
+    });
+  }
+
+  // ifareaexist(){
+  //   const manageNode: CollectionReference = collection(
+  //     this.firestore,
+  //     `${'node_manager'}`
+  //   );
+  // this.firestore.database()
+  //  a manageNode.orderByChild("ID").equalTo("U1EL5623").once("value",snapshot => {
+  //     if (snapshot.exists()){
+  //       const userData = snapshot.val();
+  //       console.log("exists!", userData);
+  //     }
+  // });
+  // }
 }
