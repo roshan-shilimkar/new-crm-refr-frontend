@@ -61,8 +61,6 @@ export class UserProfileComponent implements OnInit {
   @ViewChild('MatTabGroupss') mattab?: MatTabGroup;
   @ViewChild(MatSort) sort!: MatSort;
   userID: string = "";
-  @ViewChild('MatTaborders') mattaborders?: MatTabGroup;
-
 
   constructor(private actRoute: ActivatedRoute, private apiservice: ApiserviceService,private dialog :MatDialog) { }
 
@@ -77,13 +75,12 @@ export class UserProfileComponent implements OnInit {
 
   execute() {
     this.userID = this.actRoute.snapshot.params["id"];
-    this.apiservice.getuserdata(this.userID).pipe(take(1)).subscribe((userdata: any) => {
+    this.apiservice.getuserdata(this.userID).pipe().subscribe((userdata: any) => {
       this.userdata = userdata[0];
     });
   }
   userorders() {
     this.apiservice.getRecentAddedOrder(25, false, "by", "==", this.userID).pipe(take(1)).subscribe((recentorders: any) => {
-      console.log(recentorders);
       this.orderdataSource = new MatTableDataSource(recentorders);
       this.orderdataSource.sort = this.sort;
     });
@@ -95,39 +92,6 @@ export class UserProfileComponent implements OnInit {
     }
     else if (this.mattab?.selectedIndex == 2) {
 
-    }
-  }
-
-  ordertypechange(){
-    console.log(this.mattaborders?.selectedIndex);
-    this.orderdataSource = new MatTableDataSource();
-    if (this.mattaborders?.selectedIndex == 0) {
-      console.log(1);
-      this.apiservice.getRecentAddedOrder(100, false, "by", "==", this.userID,"journey","==","DIRECT").pipe(take(1)).subscribe((recentorders: any) => {
-        this.orderdataSource = new MatTableDataSource(recentorders);
-        this.orderdataSource.sort = this.sort;
-      });
-    }
-    else if (this.mattaborders?.selectedIndex == 1) {
-      console.log(2);
-      this.apiservice.getRecentAddedOrder(100, false, "by", "==", this.userID,"journey","==","F2F").pipe(take(1)).subscribe((recentorders: any) => {
-        this.orderdataSource = new MatTableDataSource(recentorders);
-        this.orderdataSource.sort = this.sort;
-      });
-    }
-    else if (this.mattaborders?.selectedIndex == 2) {
-      console.log(3);
-      this.apiservice.getRecentAddedOrder(100, false, "by", "==", this.userID,"journey","==","POS").pipe(take(1)).subscribe((recentorders: any) => {
-        this.orderdataSource = new MatTableDataSource(recentorders);
-        this.orderdataSource.sort = this.sort;
-      });
-    }
-    else if (this.mattaborders?.selectedIndex == 3) {
-      console.log(4);
-      this.apiservice.getRecentAddedOrder(100, false, "by", "==", this.userID,"journey","==","BURN").pipe(take(1)).subscribe((recentorders: any) => {
-        this.orderdataSource = new MatTableDataSource(recentorders);
-        this.orderdataSource.sort = this.sort;
-      });
     }
   }
 

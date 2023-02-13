@@ -52,7 +52,7 @@ export class ResourceService {
   storeTypeNow: string = "";
 
   foreignMarks: any = []
-  categoryList: Array<any> = []
+  categoryList: any = []
   merchandiseList: any[] = []
   campaignPlans: any = []
 

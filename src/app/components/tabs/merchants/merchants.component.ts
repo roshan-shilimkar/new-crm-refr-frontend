@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -76,7 +75,7 @@ export class MerchantsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(
-    private apiservice: ApiserviceService, private excelservice: ExcelexportService,private https: HttpClient,
+    private apiservice: ApiserviceService, private excelservice: ExcelexportService
   ) { }
   ngOnInit(): void {
   }
@@ -167,4 +166,6 @@ export class MerchantsComponent implements OnInit {
       this.excelservice.exportasexcelfile(this.excelarr, "demo");
     });
   }
+
+  next(){}
 }

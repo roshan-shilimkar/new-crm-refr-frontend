@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,7 +7,7 @@ import { take } from 'rxjs';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import { ExcelexportService } from 'src/app/excelexport.service';
 import { TransactionDetailsComponent } from '../transaction-details/transaction-details.component';
-
+// import { Take } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-orders',
@@ -40,6 +40,8 @@ export class OrdersComponent implements OnInit {
   ];
 
   orderdatasource!: MatTableDataSource<any>;
+
+
   OperatorArr: Array<any> = [
     {
       Title: "All", titvalue: "",
@@ -93,12 +95,32 @@ export class OrdersComponent implements OnInit {
     }, 1000);
   }
 
+  ApplyFilter() {
+    // this.showerror = false;
+    // if (this.parameters == "") {
+    //   this.showerror = true;
+    //   this.errormsg = "Please select the parameter."
+    // }
+    // else if (this.operators == "") {
+    //   this.showerror = true;
+    //   this.errormsg = "Please select the operators.";
+    // }
+    // else if (this.searchvalue == "" || this.searchvalue == undefined) {
+    //   this.showerror = true;
+    //   this.errormsg = "Please Enter the value in input Box.";
+    // }
+    // else {
+    this.execute();
+    // }
+  }
+
   execute() {
-    this.apiservice.getRecentAddedOrder(1000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(100, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
       this.orderdatasource = new MatTableDataSource(recentorders);
       this.orderdatasource.sort = this.sort;
     });
   }
+
 
   openDialog(data: any) {
     this.dialog.open(TransactionDetailsComponent, {
@@ -113,8 +135,9 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+
   exportexcel() {
-    this.apiservice.getRecentAddedOrder(1000, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
+    this.apiservice.getRecentAddedOrder(10, this.getall, this.parameters, this.operators, this.searchvalue).pipe(take(1)).subscribe((recentorders: any) => {
       this.recentorderss = "";
       this.recentorderss = recentorders;
       for (let i = 0; i < this.recentorderss.length; i++) {
@@ -182,10 +205,12 @@ export class OrdersComponent implements OnInit {
           GateWay_charges: this.recentorderss[i].amGateway,
           Total: this.recentorderss[i].amTotal,
           Order_status: orderstatus,
-          deliveryCharge:this.recentorderss[i].amParcel
         });
       }
       this.excelservice.exportasexcelfile(this.excelarr, "demo");
     });
+
   }
+
+
 }

@@ -30,6 +30,7 @@ export class TransactionDetailsComponent implements OnInit {
     this.typeid = parseFloat(this.Data.id);
     this.AInWords = this.convertinstring(parseInt(this.Transactiondata.amTotal));
     console.log(this.Data);
+
   }
 
   ngOnInit(): void {

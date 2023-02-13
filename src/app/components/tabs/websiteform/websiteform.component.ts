@@ -1,7 +1,9 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { take } from 'rxjs';
 import { ApiserviceService } from 'src/app/apiservice.service';
 
 @Component({
@@ -11,13 +13,17 @@ import { ApiserviceService } from 'src/app/apiservice.service';
 })
 export class WebsiteformComponent implements OnInit {
   dates = { seconds: 1668609733, nanoseconds: 654000000 };
+
   selected = 'option2';
+  // alldata: Array<any> = [];
   formtype: string = 'EXPLORE-BETA';
+
   WebdataSource!: MatTableDataSource<any>;
   @ViewChild(MatSort) sort!: MatSort;
 
   marchantColumns: string[] = [
     'serial',
+    // 'Id',
     'Type',
     'From',
     'Name',
@@ -27,6 +33,7 @@ export class WebsiteformComponent implements OnInit {
     'EmailId',
     'Link',
     'Description',
+    // 'action',
   ];
 
   constructor(
@@ -37,6 +44,7 @@ export class WebsiteformComponent implements OnInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
+    // const apiservice = this.injector.get(ApiserviceService);
     setTimeout(() => {
       this.execute();
     }, 1000);
@@ -61,6 +69,7 @@ export class WebsiteformComponent implements OnInit {
         this.formtype,
         tabChangeEvent?.index == 0 || tabChangeEvent == undefined ? false : true
       )
+      // .pipe(take(1))
       .subscribe((websiteform: any) => {
         console.log(websiteform);
         this.WebdataSource = new MatTableDataSource(websiteform);
@@ -77,4 +86,6 @@ export class WebsiteformComponent implements OnInit {
       new Date(date.seconds * 1000).toDateString()
     );
   }
+
+  
 }
