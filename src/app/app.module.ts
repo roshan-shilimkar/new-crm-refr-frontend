@@ -53,6 +53,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HomescreenComponent } from './components/clientside/homescreen/homescreen.component';
 import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfeedmodule/topfeedmodule.component';
 import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
+import { ProgressComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/progress/progress.component';
+import { DndDirective } from './components/clientside/homescreen/topfeedmodule/feedsection/dnd.directive';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
 import { VisitsharedetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitsharedetails/visitsharedetails.component';
@@ -61,12 +63,6 @@ import { VisitaddstoredetailsComponent } from './components/clientside/homescree
 import { VisiteditstoredetailsComponent } from './components/clientside/homescreen/visitsharemodule/visiteditstoredetails/visiteditstoredetails.component';
 import { BrandsneighbourhoodComponent } from './components/clientside/homescreen/brandsneighbourhood/brandsneighbourhood.component';
 import { HomegrowbrandsComponent } from './components/clientside/homescreen/homegrowbrands/homegrowbrands.component';
-import { HomegrownbrandsComponent } from './components/internalsection/homegrownbrands/homegrownbrands.component';
-import { InternalsectionComponent } from './components/internalsection/internalsection.component';
-import { CategorysectioninternalComponent } from './components/internalsection/homegrownbrands/categorysectioninternal/categorysectioninternal.component';
-import { VisitshareinternalComponent } from './components/internalsection/visitshareinternal/visitshareinternal.component';
-import { SettingComponent } from './components/clientside/setting/setting.component';
-import { AddcityAndAreaComponent } from './components/clientside/setting/addcity-and-area/addcity-and-area.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +85,8 @@ import { AddcityAndAreaComponent } from './components/clientside/setting/addcity
     HomescreenComponent,
     TopfeedmoduleComponent,
     FeedsectionComponent,
+    ProgressComponent,
+    DndDirective,
     VisitsharemoduleComponent,
     VisitsharedetailsComponent,
     VisitallstoredetailsComponent,
@@ -96,12 +94,6 @@ import { AddcityAndAreaComponent } from './components/clientside/setting/addcity
     VisiteditstoredetailsComponent,
     BrandsneighbourhoodComponent,
     HomegrowbrandsComponent,
-    HomegrownbrandsComponent,
-    InternalsectionComponent,
-    CategorysectioninternalComponent,
-    VisitshareinternalComponent,
-    SettingComponent,
-    AddcityAndAreaComponent,
   ],
   imports: [
     MatDialogModule,
