@@ -53,8 +53,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { HomescreenComponent } from './components/clientside/homescreen/homescreen.component';
 import { TopfeedmoduleComponent } from './components/clientside/homescreen/topfeedmodule/topfeedmodule.component';
 import { FeedsectionComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/feedsection.component';
-import { ProgressComponent } from './components/clientside/homescreen/topfeedmodule/feedsection/progress/progress.component';
-import { DndDirective } from './components/clientside/homescreen/topfeedmodule/feedsection/dnd.directive';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { VisitsharemoduleComponent } from './components/clientside/homescreen/visitsharemodule/visitsharemodule.component';
 import { VisitsharedetailsComponent } from './components/clientside/homescreen/visitsharemodule/visitsharedetails/visitsharedetails.component';
@@ -91,8 +89,6 @@ import { AddcityAndAreaComponent } from './components/clientside/setting/addcity
     HomescreenComponent,
     TopfeedmoduleComponent,
     FeedsectionComponent,
-    ProgressComponent,
-    DndDirective,
     VisitsharemoduleComponent,
     VisitsharedetailsComponent,
     VisitallstoredetailsComponent,
