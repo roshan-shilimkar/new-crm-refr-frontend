@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VisitshareinternalComponent } from './visitshareinternal.component';
+import { ProgressComponent } from './progress.component';
 
-describe('VisitshareinternalComponent', () => {
-  let component: VisitshareinternalComponent;
-  let fixture: ComponentFixture<VisitshareinternalComponent>;
+describe('ProgressComponent', () => {
+  let component: ProgressComponent;
+  let fixture: ComponentFixture<ProgressComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VisitshareinternalComponent ]
+      declarations: [ ProgressComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VisitshareinternalComponent);
+    fixture = TestBed.createComponent(ProgressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -17,12 +16,6 @@ export class VisitallstoredetailsComponent implements OnInit {
     },
   ];
 
-  stores: Array<any> = [
-    { S_name: 'Dinshaws Xpress cafe', Category: 'Cafe',Last_m:"23/2/2023" },
-    { S_name: 'Mexichino', Category: 'Cafe',Last_m:"23/2/2023" },
-    { S_name: 'UK14 Icecream', Category: 'Cafe',Last_m:"23/2/2023" },
-  ]
-
   constructor(public router: Router) {}
 
   ngOnInit(): void {}
@@ -39,22 +32,4 @@ export class VisitallstoredetailsComponent implements OnInit {
     }
     console.log('click');
   }
-
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
-  
 }

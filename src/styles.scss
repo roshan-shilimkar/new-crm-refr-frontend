@@ -81,10 +81,6 @@ body {
   font-size: 27px !important;
 }
 
-.fs_24 {
-  font-size: 24px !important;
-}
-
 .xl_size {
   font-size: 22px !important;
 }
@@ -183,11 +179,6 @@ body {
   padding-right: 10px !important;
 }
 
-.tb15padding {
-  padding-top: 15px !important;
-  padding-bottom: 15px !important;
-}
-
 .lr15padding {
   padding-left: 15px !important;
   padding-right: 15px !important;
@@ -244,10 +235,6 @@ body {
 
 .r5padding {
   padding-right: 5px !important;
-}
-
-.A5padding {
-  padding: 5px !important;
 }
 
 .lr5padding {
@@ -406,11 +393,6 @@ body {
   margin-right: 5px !important;
 }
 
-.tb5margin {
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
-}
-
 .t10margin {
   margin-top: 10px !important;
 }
@@ -425,11 +407,6 @@ body {
 
 .r10margin {
   margin-right: 10px !important;
-}
-
-.tb10margin {
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
 }
 
 .r15margin {
@@ -463,17 +440,8 @@ body {
 .b15margin {
   margin-bottom: 15px !important;
 }
-
 .b20margin {
   margin-bottom: 20px !important;
-}
-
-.b25margin {
-  margin-bottom: 25px !important;
-}
-
-.b30margin {
-  margin-bottom: 30px !important;
 }
 
 .l15margin {
@@ -492,19 +460,21 @@ body {
   margin-bottom: 60px !important;
 }
 
-.M5width {
-  max-width: 5%;
-  min-width: 5%;
+.w80 {
+  width: 80% !important;
+}
+
+.w90 {
+  width: 90% !important;
+}
+
+.w25 {
+  width: 25% !important;
 }
 
 .M10width {
   max-width: 10%;
   min-width: 10%;
-}
-
-.M15width {
-  max-width: 15%;
-  min-width: 15%;
 }
 
 .M20width {
@@ -522,14 +492,15 @@ body {
   min-width: 30%;
 }
 
+.M33width {
+  max-width: 33%;
+  min-width: 33%;
+}
+
 .M40width {
   max-width: 40%;
   min-width: 40%;
-}
-
-.M45width {
-  max-width: 45%;
-  min-width: 45%;
+  width: 40%;
 }
 
 .M50width {
@@ -589,10 +560,6 @@ body {
 
 .White_txt {
   color: #fff;
-}
-
-.White_bg {
-  background-color: #fff;
 }
 
 .green_txt {
@@ -742,6 +709,7 @@ body {
 .crminput {
   .mat-form-field-wrapper {
     padding-bottom: 0px !important;
+
     .mat-form-field-infix {
       padding: 10px 0 !important;
       border-top: none;
@@ -825,38 +793,34 @@ body {
   display: inline;
 }
 
-.d_none {
-  display: none;
-}
-
 // ng-select csss
+
 .multiselect-dropdown {
+  width: 48% !important;
   .dropdown-btn {
     border: 1px solid rgba(0, 0, 0, 0.12) !important;
-    padding: 5px 0 !important;
+    padding: 10px !important;
   }
   .dropdown-multiselect__caret {
     right: 0px !important;
     top: 4px !important;
-    height: 25px !important;
-    :before {
-      border-width: 5px 5px 0;
-    }
   }
   span {
-    padding: 0 7px !important;
+    padding: 0 !important;
   }
   .selected-item {
     padding: 2px 10px !important;
-    margin-right: 0px !important;
-    margin-left: 5px !important;
   }
+}
+
+.w25 {
+  width: 25%;
 }
 
 // purple border
 
 .Apurpleborder {
-  border: 1px solid #874bf9 !important;
+  border: 1px solid #874bf9;
 }
 
 .pos_relative {
@@ -872,10 +836,4 @@ body {
     display: flex;
     padding: 0;
   }
-}
-
-//
-
-.dottedborder {
-  border: 1px dotted #dbdbdb;
 }

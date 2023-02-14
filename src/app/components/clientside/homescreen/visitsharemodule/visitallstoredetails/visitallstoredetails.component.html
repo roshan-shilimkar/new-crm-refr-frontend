@@ -6,17 +6,23 @@
                 <path d="M12 19L5 12L12 5" stroke="black" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round" />
             </svg>
+
         </a>
-        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/storedetails/visitstoresection'">
-            All store details
-        </span>
-        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/storedetails/brandsallstore'">
-            Brands in your neighbourhood
-        </span>
+        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/storedetails/visitstoresection'">All
+            store
+            details</span>
+        <span class="xxl_size boldtext lr15padding AScenter" *ngIf="router.url == '/storedetails/brandsallstore'">Brands
+            in
+            your
+            neighbourhood</span>
     </div>
-    <div class="t50margin">
+
+    <div class="t50margin lr55padding">
+        <div class="boldtext l_size b20margin">All stores</div>
+
         <div class="dflex">
-            <!-- <section *ngFor="let x of [0,1,2]">
+            <section *ngFor="let x of [0,1,2]">
+
                 <main class="section">
                     <div class="w200 h200 Aborder dflex flex_col JCcenter AIcenter pos_relative">
                         <div class="c_align boldtext m_size b15margin">
@@ -73,6 +79,7 @@
                         Delete
                     </div>
                 </main>
+
             </section>
             <section>
                 <main>
@@ -83,48 +90,14 @@
                         </mat-icon>
                     </div>
                 </main>
-            </section> -->
 
-
-            <div class="boxshw M100width">
-                <div class="dflex JCevenly M100width tb15padding s_size">
-                    <div class="M5width"></div>
-                    <div class="regulartext M30width">Store name</div>
-                    <div class="regulartext M15width c_align">Category</div>
-                    <div class="regulartext M25width c_align">Last Updated</div>
-                    <div class="regulartext M25width c_align">Action</div>
-                </div>
-                <div cdkDropListGroup>
-                    <div class="example-container M100width">
-                        <div cdkDropList class="example-list"
-                            (cdkDropListDropped)="drop($event)">
-                            <div class="example-box tborder dflex s_size White_bg" *ngFor="let item of stores" cdkDrag>
-                                <div class="M5width dflex JCcenter">
-                                    <mat-icon>menu</mat-icon>
-                                </div>
-                                <div class="M30width l_align">
-                                    {{item.S_name}}
-                                </div>
-                                <div class="M15width c_align">
-                                    {{item.Category}}
-                                </div>
-                                <div class="M25width c_align">
-                                    {{item.Last_m}}
-                                </div>
-                                <div class="M25width c_align">
-                                    <a routerLink="/addstore">
-                                        <mat-icon class="black_text">edit</mat-icon>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
+
         <div>
             <button mat-button routerLink="/visitdetails"
                 class="viewbtn t5padding b5padding l30padding r30padding t30margin b15margin">Update</button>
         </div>
     </div>
+
 </div>
